@@ -1,32 +1,18 @@
 from debounce import button_debounce
 from statemachine import StateMachine
 from ktraining import kTraining, kExercise
+import ktraining
 import utime as time
 
-btn_left = button_debounce(0)
+btn_left   = button_debounce(0)
 btn_center = button_debounce(4)
-btn_right = button_debounce(5)
+btn_right  = button_debounce(5)
 
-A1  = kExercise("A1",   240, {"Bew.": 15})
-B6  = kExercise("B6",   170, {"Sitz": 19, "Lehne": 1, "Position": 6})
-F1  = kExercise("F1",    40, {"Loch": 3})
-F21 = kExercise("F2.1",  60, {"Loch": 4, "Fuss": 7})
-F3  = kExercise("F3",   180, {"Fuss": 12, "Knie": 8, "Start": 3, "Bew.": 15})
-C1  = kExercise("C1",   136, {"Sitz": 6, "Lehne": "vorne", "Arme": 1})
-C7  = kExercise("C7",   180, {"Polster": 6, "Bew.": "2-17"})
-D5  = kExercise("D5",   118, {"Lehne": 3, "Arme": 3})
-D6  = kExercise("D6",   130, {"Sitz": 7, "Lehne": 3, "Griffe": "vertikal"})
-G5  = kExercise("G5",    94, {"Sitz": 5, "Polster": 18, "Kopf": 4})
-
-mytraining = kTraining((A1,B6,F1,F21,F3,C1,C7,D5,D6,G5))
-speed_factor = 100
-speed_factor2 = 10
-
-    # while True:
-    #     if btn_left.transition() == 1:
-    #     if btn_center.transition() == 1:
-    #     if btn_right.transition() == 1:
-
+mytraining = ktraining.load_training("myplan.txt")
+mytraining.exercises[0].weight = 888
+ktraining.save_training("newplan.txt", mytraining)
+speed_factor  = 100
+speed_factor2 =  10
 
 def sm_training_start(training):
     print("Welcome to kTrain!")
@@ -149,7 +135,15 @@ def sm_training_discard(training):
 
 def sm_training_complete(training):
     print("Training is complete.")
-    return ("sm_training_exit", training)
+    print("discard / save / x")
+    while True:
+        if btn_left.transition() == 1:
+            print("Training was discarded")
+            return ("sm_training_exit", training)
+        if btn_center.transition() == 1:
+            print("Training was saved")
+            ktraining.save_training("savedplan.txt", training)
+            return ("sm_training_exit", training)
 
 def sm_training_exit(training):
     return (sm_training_exit, None)

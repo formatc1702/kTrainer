@@ -91,3 +91,38 @@ class kExercise:
         self.reps    = 0
         self.skipped = False
         self.done    = False
+
+def load_params(filename):
+    ex = ()
+    with open(filename) as f:
+        for line in f:
+            if(line[0] != " "):
+                exname = line.rstrip()
+                ex = ex + (kExercise(exname, 0, {}),)
+                # print("exercise", exname)
+            else:
+                (key, val) = line.split()
+                # print("param:", key, "value:", val)
+                ex[-1].params[key] = val
+    return ex
+
+def load_training(filename):
+    candidates = load_params("myparams.txt")
+    ex = ()
+    with open(filename) as f:
+        for line in f:
+            (name, weight) = line.split()
+            params = {}
+            for candidate in candidates:
+                if candidate.name == name:
+                    params = candidate.params
+            ex = ex + (kExercise(name, int(weight), params),)
+    return kTraining(ex)
+
+def save_training(filename, training):
+    with open(filename, 'w') as f:
+        for ex in training.exercises:
+            f.write(ex.name)
+            f.write("\t")
+            f.write(str(ex.weight))
+            f.write("\n")
