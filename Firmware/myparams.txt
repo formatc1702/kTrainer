@@ -1,0 +1,34 @@
+A1
+    Bew 15
+B6
+    Sitz 19
+    Lehne 1
+    Position 6
+F1
+    Loch 3
+F2.1
+    Loch 4
+    Fuss 7
+F3
+    Fuss 12
+    Knie 8
+    Start 3
+    Bew 15
+C1
+    Sitz 6
+    Lehne vorne
+    Arme 1
+C7
+    Polster 6
+    Bew 2-17
+D5
+    Lehne 3
+    Arme 3
+D6
+    Sitz 7
+    Lehne 3
+    Griffe vertikal
+G5
+    Sitz 5
+    Polster 18
+    Kopf 4

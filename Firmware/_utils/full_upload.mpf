@@ -1,0 +1,6 @@
+open tty.wchusbserial1410
+put ../debounce.py
+put ../statemachine.py
+put ../ktraining.py
+ls
+close
