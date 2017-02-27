@@ -7,12 +7,13 @@ btn_left   = button_debounce(0)
 btn_center = button_debounce(4)
 btn_right  = button_debounce(5)
 
+countdown = 0 # global!
+
+speed_factor  =   10
+speed_factor2 =    1
+
 training = kTraining()
 training.load_training("myplan.txt")
-training.exercises[0].weight = 888
-#training.save_training("newplan.txt")
-speed_factor  = 100
-speed_factor2 =  10
 
 def s_start():
     print("Welcome to kTrain!")
@@ -34,18 +35,39 @@ def s_before():
             training.previous()
             return("s_before")
         if btn_center.transition() == 1:
+            print("Doing exercise",training.current_exercise.name)
+            print("cancel / x / skip")
+            global countdown
+            countdown = 5
             return("s_countdown")
         if btn_right.transition() == 1:
             training.next()
             return("s_before")
 
 def s_countdown():
-    print("Doing exercise",training.current_exercise.name)
-    for i in reversed(range(1,6)):
-        print(i, "... ", end="")
-        time.sleep(1.0 / speed_factor2)
-    print("")
-    return("s_go_up")
+    global countdown
+    now = time.ticks_ms()
+    print(countdown, "... ", end="")
+    while True:
+        if time.ticks_ms() - now > 1000 / speed_factor2:
+            countdown -= 1
+            if countdown > 0:
+                return("s_countdown")
+            else:
+                print("")
+                return("s_go_up")
+        if btn_left.transition() == 1:
+            print("")
+            training.current_exercise.reset()
+            return("s_before")
+        if btn_right.transition() == 1:
+            print("")
+            training.current_exercise.skip()
+            if training.is_complete:
+                return("s_completed")
+            else:
+                training.next_pending()
+                return("s_before")
 
 def s_paused():
     print("Training paused")
@@ -54,39 +76,55 @@ def s_paused():
         if btn_left.transition() == 1:
             return("s_discard")
         if btn_center.transition() == 1:
+            global countdown
+            countdown = 5
             return("s_countdown")
         if btn_right.transition() == 1:
             pass
 
 def s_go_up():
+    now = time.ticks_ms()
     print(training.current_exercise.reps, "^", end="")
-    time.sleep(4.0 / speed_factor)
-    if btn_center.transition() == 1:
-        return("s_paused")
-    return("s_stay_up")
+    while True:
+        if btn_center.transition() == 1:
+            return("s_paused")
+        if time.ticks_ms() - now > 4000 / speed_factor:
+            return("s_stay_up")
 
 def s_stay_up():
+    now = time.ticks_ms()
     print("-", end="")
-    time.sleep(2.0 / speed_factor)
-    return("s_go_down")
+    while True:
+        if btn_center.transition() == 1:
+            return("s_paused")
+        if time.ticks_ms() - now > 2000 / speed_factor:
+            return("s_go_down")
 
 def s_go_down():
+    now = time.ticks_ms()
     print("v", end="")
-    time.sleep(4.0 / speed_factor)
-    return("s_stay_down")
+    while True:
+        if btn_center.transition() == 1:
+            return("s_paused")
+        if time.ticks_ms() - now > 4000 / speed_factor:
+            return("s_stay_down")
 
 def s_stay_down():
+    now = time.ticks_ms()
     print("_", end="")
-    time.sleep(2.0 / speed_factor)
-    training.current_exercise.reps += 1
-    if (training.current_exercise.reps >= training.max_reps):
-        training.current_exercise.finish()
-        print(" ")
-        print("Done...")
-        return("s_after")
-    else:
-        print("")
-        return("s_go_up")
+    while True:
+        if btn_center.transition() == 1:
+            return("s_paused")
+        if time.ticks_ms() - now > 2000 / speed_factor:
+            training.current_exercise.reps += 1
+            if (training.current_exercise.reps >= training.max_reps):
+                training.current_exercise.finish()
+                print("")
+                print("Done...")
+                return("s_after")
+            else:
+                print("")
+                return("s_go_up")
 
 def s_after():
     print("Finished exercise", training.current_exercise.name)
