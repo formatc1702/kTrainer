@@ -1,7 +1,7 @@
 max_reps = 10
 
 class kTraining:
-    def __init__(self, exercises=()):
+    def __init__(self, exercises=[]):
         self.exercises = exercises
         self.curex     = 0
         self.max_reps  = max_reps
@@ -33,19 +33,6 @@ class kTraining:
             while self.current_exercise.done == True:
                 self.next()
 
-    def do(self):
-        if not self.is_complete:
-            if (self.current_exercise.done == True):
-                print("Exerecise", self.current_exercise.name,"is already done.")
-            else:
-                self.current_exercise.do()
-        # if self.is_complete:
-        #     print("The training is complete")
-
-    def do_and_continue(self):
-        self.do()
-        self.next()
-
     def reset(self):
         for ex in self.exercises:
             ex.reset()
@@ -60,19 +47,17 @@ class kTraining:
                 status = "X "
             else:
                 status = "- "
-            print ("{:<4}".format(ex.name), '\t', status, "<" if self.curex == i else " ", '\t', "{:>3}".format(ex.weight))
+            print ("{:<4}\t{} {}\t{:>3}".format(ex.name, status, "<" if self.curex == i else " ", ex.weight))
 
     def load_params(self, filename):
-        ex = ()
+        ex = []
         with open(filename) as f:
             for line in f:
                 if(line[0] != " "):
                     exname = line.rstrip()
-                    ex = ex + (kExercise(exname, 0, {}),)
-                    # print("exercise", exname)
+                    ex.append(kExercise(exname, 0, {}),)
                 else:
                     (key, val) = line.split()
-                    # print("param:", key, "value:", val)
                     ex[-1].params[key] = val
         return ex
 
@@ -85,15 +70,12 @@ class kTraining:
                 for candidate in candidates:
                     if candidate.name == name:
                         params = candidate.params
-                self.exercises = self.exercises + (kExercise(name, int(weight), params),)
+                self.exercises.append(kExercise(name, int(weight), params))
 
     def save_training(self, filename):
         with open(filename, 'w') as f:
             for ex in self.exercises:
-                f.write(ex.name)
-                f.write("\t")
-                f.write(str(ex.weight))
-                f.write("\n")
+                f.write("{}\t{}\n".format(ex.name, str(ex.weight)))
 
 class kExercise:
     def __init__(self, name, weight, params):
