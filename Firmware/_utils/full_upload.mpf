@@ -1,5 +1,6 @@
 open tty.SLAB_USBtoUART
 
+put ../boot.py
 put ../debounce.py
 put ../statemachine.py
 put ../ktraining.py
