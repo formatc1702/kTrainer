@@ -1,6 +1,15 @@
-open tty.wchusbserial1410
+open tty.SLAB_USBtoUART
+
 put ../debounce.py
 put ../statemachine.py
 put ../ktraining.py
+put ../main.py
+
+put ../myplan.txt
+put ../myparams.txt
+
+close
+
+open tty.SLAB_USBtoUART
 ls
 close
