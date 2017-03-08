@@ -1,7 +1,14 @@
+from machine import Pin, I2C
+import ssd1306
+from gfx import GFX
 from ktraining import kTraining, kExercise
 from debounce import button_debounce
 from statemachine import StateMachine
 import utime as time
+
+i2c = I2C(scl=Pin(14), sda=Pin(16), freq=100000)
+oled = ssd1306.SSD1306_I2C(128, 32, i2c)
+g = GFX(128, 32, oled.pixel)
 
 training = kTraining()
 training.load_training("myplan.txt")
@@ -12,12 +19,14 @@ btn_right  = button_debounce(5)
 
 countdown = 0 # global!
 
-speed_factor  =   100
-speed_factor2 =    10
+speed_factor  =   50
+speed_factor2 =    2
 
 def s_start():
-    print("Welcome to kTrain!")
-    print("exit / start / review")
+    oled.fill(0)
+    oled.text("kTrain!",0,0)
+    oled.text("exit/start/view",0,24)
+    oled.show()
     while True:
         if btn_left.transition() == 1:
             return("s_exit")
@@ -28,15 +37,21 @@ def s_start():
             return("s_review")
 
 def s_before():
-    print("About to start exercise {} with weight {} and params: {}".format(training.current_exercise.name, training.current_exercise.weight, training.current_exercise.params))
-    print("(SKIPPED)" if training.current_exercise.skipped else ("(DONE)" if training.current_exercise.done else "(PENDING)"))
-    print("abort / start / ->")
+    oled.fill(0)
+    # print("About to start exercise {} with weight {} and params: {}".format(training.current_exercise.name, training.current_exercise.weight, training.current_exercise.params))
+    oled.text("Exercise {}".format(training.current_exercise.name),0,0)
+    # print("(SKIPPED)" if training.current_exercise.skipped else ("(DONE)" if training.current_exercise.done else "(PENDING)"))
+    oled.text("(SKIPPED)" if training.current_exercise.skipped else ("(DONE)" if training.current_exercise.done else "(PENDING)"),0,8)
+    oled.text("abort/start/->",0,24)
+    oled.show()
     while True:
         if btn_left.transition() == 1:
             return("s_abort")
         if btn_center.transition() == 1:
-            print("Doing exercise",training.current_exercise.name)
-            print("cancel / x / skip")
+            oled.fill(0)
+            oled.text("Doing {}".format(training.current_exercise.name),0,0)
+            oled.text("cancel/x/skip",0,24)
+            oled.show()
             global countdown
             countdown = 5
             return("s_countdown")
@@ -47,21 +62,24 @@ def s_before():
 def s_countdown():
     global countdown
     now = time.ticks_ms()
-    print(countdown, "... ", end="")
+    oled.fill(0)
+    oled.text("{}".format(countdown),0,0)
+    oled.text("abort/x/skip",0,24)
+    oled.show()
     while True:
         if time.ticks_ms() - now > 1000 / speed_factor2:
             countdown -= 1
             if countdown > 0:
                 return("s_countdown")
             else:
-                print("")
+                # print("")
                 return("s_go_up")
         if btn_left.transition() == 1:
-            print("")
+            # print("")
             training.current_exercise.reset()
             return("s_before")
         if btn_right.transition() == 1:
-            print("")
+            # print("")
             training.current_exercise.skip()
             if training.is_complete:
                 return("s_completed")
@@ -70,8 +88,10 @@ def s_countdown():
                 return("s_before")
 
 def s_paused():
-    print("Training paused")
-    print("discard / continue / x")
+    oled.fill(0)
+    oled.text("Training paused",0,0)
+    oled.text("disc/cont/x",0,24)
+    oled.show()
     while True:
         if btn_left.transition() == 1:
             return("s_discard")
@@ -84,7 +104,11 @@ def s_paused():
 
 def s_go_up():
     now = time.ticks_ms()
-    print(training.current_exercise.reps, "^", end="")
+    # print(training.current_exercise.reps, "^", end="")
+    oled.fill(0)
+    oled.text("^ {}".format(training.current_exercise.reps),0,0)
+    oled.text("x/pause/x",0,24)
+    oled.show()
     while True:
         if btn_center.transition() == 1:
             return("s_paused")
@@ -93,7 +117,10 @@ def s_go_up():
 
 def s_stay_up():
     now = time.ticks_ms()
-    print("-", end="")
+    oled.fill(0)
+    oled.text("- {}".format(training.current_exercise.reps),0,0)
+    oled.text("x/pause/x",0,24)
+    oled.show()
     while True:
         if btn_center.transition() == 1:
             return("s_paused")
@@ -102,7 +129,10 @@ def s_stay_up():
 
 def s_go_down():
     now = time.ticks_ms()
-    print("v", end="")
+    oled.fill(0)
+    oled.text("v {}".format(training.current_exercise.reps),0,0)
+    oled.text("x/pause/x",0,24)
+    oled.show()
     while True:
         if btn_center.transition() == 1:
             return("s_paused")
@@ -111,7 +141,10 @@ def s_go_down():
 
 def s_stay_down():
     now = time.ticks_ms()
-    print("_", end="")
+    oled.fill(0)
+    oled.text("_ {}".format(training.current_exercise.reps),0,0)
+    oled.text("x/pause/x",0,24)
+    oled.show()
     while True:
         if btn_center.transition() == 1:
             return("s_paused")
@@ -119,16 +152,18 @@ def s_stay_down():
             training.current_exercise.reps += 1
             if (training.current_exercise.reps >= training.max_reps):
                 training.current_exercise.finish()
-                print("")
-                print("Done...")
+                # print("")
+                # print("Done...")
                 return("s_after")
             else:
-                print("")
+                # print("")
                 return("s_go_up")
 
 def s_after():
-    print("Finished exercise {}".format(training.current_exercise.name))
-    print("discard / continue / adjust")
+    oled.fill(0)
+    oled.text("Finished {}".format(training.current_exercise.name),0,0)
+    oled.text("disc/cont/adj",0,24)
+    oled.show()
     while True:
         if btn_left.transition() == 1:
             return("s_discard")
@@ -142,22 +177,28 @@ def s_after():
             return("s_adjust")
 
 def s_adjust():
-    print("Current weight for exercise {}: {}".format(training.current_exercise.name,training.current_exercise.weight))
-    print("- / save / +")
+    oled.fill(0)
+    # print("Current weight for exercise {}: {}".format(training.current_exercise.name,training.current_exercise.weight))
+    oled.text("{} Weight".format(training.current_exercise.name),0,0)
+    oled.text("{}".format(training.current_exercise.weight),0,8)
+    oled.text("- / save / +",0,24)
+    oled.show()
     while True:
         if btn_left.transition() == 1:
             training.current_exercise.weight -= 2
             return("s_adjust")
         if btn_center.transition() == 1:
-            print("Set weight for exercise {}: {}".format(training.current_exercise.name,training.current_exercise.weight))
+            # print("Set weight for exercise {}: {}".format(training.current_exercise.name,training.current_exercise.weight))
             return("s_after")
         if btn_right.transition() == 1:
             training.current_exercise.weight += 2
             return("s_adjust")
 
 def s_abort():
-    print("Really abort training?")
-    print("no / x / yes")
+    oled.fill(0)
+    oled.text("Abort training?",0,0)
+    oled.text("no / x / yes",0,24)
+    oled.show()
     while True:
         if btn_left.transition() == 1:
             return("s_before")
@@ -168,8 +209,10 @@ def s_abort():
             return("s_completed")
 
 def s_discard():
-    print("Discard exercise ", training.current_exercise.name, "?")
-    print("cancel / reset / skip")
+    oled.fill(0)
+    oled.text("Discard {}?".format(training.current_exercise.name),0,0)
+    oled.text("cancel/rst/skip",0,24)
+    oled.show()
     while True:
         if btn_left.transition() == 1:
             if training.current_exercise.ongoing:
@@ -189,8 +232,10 @@ def s_discard():
 
 
 def s_completed():
-    print("Training is complete.")
-    print("discard / save / x")
+    oled.fill(0)
+    oled.text("Training done.",0,0)
+    oled.text("discard/save/x",0,24)
+    oled.show()
     while True:
         if btn_left.transition() == 1:
             print("Training was discarded")
@@ -201,9 +246,13 @@ def s_completed():
             return("s_start")
 
 def s_review():
+    oled.fill(0)
     print("Here is a review of your training:")
     training.print_plan()
-    print("x / OK / x")
+    oled.text("Printed review",0,0)
+    oled.text("on serial out",0,8)
+    oled.text("x / OK / x",0,24)
+    oled.show()
     while True:
         if btn_center.transition() == 1:
             return("s_start")
