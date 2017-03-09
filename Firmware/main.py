@@ -1,14 +1,21 @@
 from machine import Pin, I2C
 import ssd1306
 from gfx import GFX
+import bitmapfont
 from ktraining import kTraining, kExercise
 from debounce import button_debounce
 from statemachine import StateMachine
 import utime as time
 
-i2c = I2C(scl=Pin(14), sda=Pin(16), freq=100000)
-oled = ssd1306.SSD1306_I2C(128, 32, i2c)
-g = GFX(128, 32, oled.pixel)
+DISP_W = const(128)
+DISP_H = const(32)
+
+i2c  = I2C(scl=Pin(14), sda=Pin(16), freq=100000)
+oled = ssd1306.SSD1306_I2C  (DISP_W, DISP_H, i2c)
+g    = GFX                  (DISP_W, DISP_H, oled.pixel)
+bf   = bitmapfont.BitmapFont(DISP_W, DISP_H, oled.pixel)
+
+bf.init()
 
 training = kTraining()
 training.load_training("myplan.txt")
@@ -24,7 +31,7 @@ speed_factor2 =    2
 
 def s_start():
     oled.fill(0)
-    oled.text("kTrain!",0,0)
+    bf.text('kTrain',0,0,3,1)
     oled.text("exit/start/view",0,24)
     oled.show()
     while True:
