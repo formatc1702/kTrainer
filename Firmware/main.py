@@ -1,77 +1,78 @@
 from machine import Pin, I2C
 import ssd1306
-from gfx import GFX
 import bitmapfont
 from ktraining import kTraining, kExercise
 from debounce import button_debounce
 from statemachine import StateMachine
+import bitmaps
 import utime as time
-
-DISP_W = const(128)
-DISP_H = const(32)
-
-i2c  = I2C(scl=Pin(14), sda=Pin(16), freq=100000)
-oled = ssd1306.SSD1306_I2C  (DISP_W, DISP_H, i2c)
-g    = GFX                  (DISP_W, DISP_H, oled.pixel)
-bf   = bitmapfont.BitmapFont(DISP_W, DISP_H, oled.pixel)
-
-bf.init()
-
-training = kTraining()
-training.load_training("myplan.txt")
 
 btn_left   = button_debounce(0)
 btn_center = button_debounce(4)
 btn_right  = button_debounce(5)
+
+DISP_W = const(128)
+DISP_H = const( 32)
+i2c  = I2C(scl=Pin(14), sda=Pin(16), freq=100000)
+oled = ssd1306.SSD1306_I2C  (DISP_W, DISP_H, i2c)
+bf   = bitmapfont.BitmapFont(DISP_W, DISP_H, oled.pixel, oled.framebuf.fill_rect)
+bf.init()
+bmp = bitmaps.MyGFX(oled.pixel)
+
+training = kTraining()
+training.load_training("myplan.txt")
 
 countdown = 0 # global!
 
 speed_factor  =   50
 speed_factor2 =    2
 
+
 def s_start():
     oled.fill(0)
     bf.text('kTrain',0,0,3,1)
-    oled.text("exit/start/view",0,24)
+    bmp.button_icons3(bitmaps.X, bitmaps.PLAY, bitmaps.REPORT)
     oled.show()
     while True:
         if btn_left.transition() == 1:
             return("s_exit")
         if btn_center.transition() == 1:
             training.reset()
-            return("s_before")
+            return("s_select")
         if btn_right.transition() == 1:
             return("s_review")
+
+def s_select():
+    return("s_before")
 
 def s_before():
     oled.fill(0)
     # print("About to start exercise {} with weight {} and params: {}".format(training.current_exercise.name, training.current_exercise.weight, training.current_exercise.params))
-    oled.text("Exercise {}".format(training.current_exercise.name),0,0)
+    #oled.text("Exercise {}".format(training.current_exercise.name),0,0)
     # print("(SKIPPED)" if training.current_exercise.skipped else ("(DONE)" if training.current_exercise.done else "(PENDING)"))
-    oled.text("(SKIPPED)" if training.current_exercise.skipped else ("(DONE)" if training.current_exercise.done else "(PENDING)"),0,8)
-    oled.text("abort/start/->",0,24)
+    oled.framebuf.fill_rect(0,0,52,18,1)
+    bf.text("{:^4}".format(training.current_exercise.name),1,1,2,0)
+    oled.text("{:>3}".format(training.current_exercise.weight),54,1)
+    oled.text("S" if training.current_exercise.skipped else ("D" if training.current_exercise.done else "P"),100,1)
+    bmp.button_icons3(bitmaps.X, bitmaps.PLAY, bitmaps.RIGHT)
     oled.show()
     while True:
         if btn_left.transition() == 1:
             return("s_abort")
         if btn_center.transition() == 1:
-            oled.fill(0)
-            oled.text("Doing {}".format(training.current_exercise.name),0,0)
-            oled.text("cancel/x/skip",0,24)
-            oled.show()
             global countdown
             countdown = 5
             return("s_countdown")
         if btn_right.transition() == 1:
             training.next()
-            return("s_before")
+            return("s_select")
 
 def s_countdown():
     global countdown
     now = time.ticks_ms()
     oled.fill(0)
     oled.text("{}".format(countdown),0,0)
-    oled.text("abort/x/skip",0,24)
+    bmp.button_icons3(bitmaps.X, bitmaps.BLANK, bitmaps.SKIP)
     oled.show()
     while True:
         if time.ticks_ms() - now > 1000 / speed_factor2:
@@ -79,25 +80,22 @@ def s_countdown():
             if countdown > 0:
                 return("s_countdown")
             else:
-                # print("")
                 return("s_go_up")
         if btn_left.transition() == 1:
-            # print("")
             training.current_exercise.reset()
-            return("s_before")
+            return("s_select")
         if btn_right.transition() == 1:
-            # print("")
             training.current_exercise.skip()
             if training.is_complete:
                 return("s_completed")
             else:
                 training.next_pending()
-                return("s_before")
+                return("s_select")
 
 def s_paused():
     oled.fill(0)
     oled.text("Training paused",0,0)
-    oled.text("disc/cont/x",0,24)
+    bmp.button_icons3(bitmaps.X, bitmaps.PLAY, bitmaps.BLANK)
     oled.show()
     while True:
         if btn_left.transition() == 1:
@@ -114,7 +112,7 @@ def s_go_up():
     # print(training.current_exercise.reps, "^", end="")
     oled.fill(0)
     oled.text("^ {}".format(training.current_exercise.reps),0,0)
-    oled.text("x/pause/x",0,24)
+    bmp.button_icons3(bitmaps.BLANK, bitmaps.PAUSE, bitmaps.BLANK)
     oled.show()
     while True:
         if btn_center.transition() == 1:
@@ -126,7 +124,7 @@ def s_stay_up():
     now = time.ticks_ms()
     oled.fill(0)
     oled.text("- {}".format(training.current_exercise.reps),0,0)
-    oled.text("x/pause/x",0,24)
+    bmp.button_icons3(bitmaps.BLANK, bitmaps.PAUSE, bitmaps.BLANK)
     oled.show()
     while True:
         if btn_center.transition() == 1:
@@ -138,7 +136,7 @@ def s_go_down():
     now = time.ticks_ms()
     oled.fill(0)
     oled.text("v {}".format(training.current_exercise.reps),0,0)
-    oled.text("x/pause/x",0,24)
+    bmp.button_icons3(bitmaps.BLANK, bitmaps.PAUSE, bitmaps.BLANK)
     oled.show()
     while True:
         if btn_center.transition() == 1:
@@ -150,7 +148,7 @@ def s_stay_down():
     now = time.ticks_ms()
     oled.fill(0)
     oled.text("_ {}".format(training.current_exercise.reps),0,0)
-    oled.text("x/pause/x",0,24)
+    bmp.button_icons3(bitmaps.BLANK, bitmaps.PAUSE, bitmaps.BLANK)
     oled.show()
     while True:
         if btn_center.transition() == 1:
@@ -159,17 +157,14 @@ def s_stay_down():
             training.current_exercise.reps += 1
             if (training.current_exercise.reps >= training.max_reps):
                 training.current_exercise.finish()
-                # print("")
-                # print("Done...")
                 return("s_after")
             else:
-                # print("")
                 return("s_go_up")
 
 def s_after():
     oled.fill(0)
     oled.text("Finished {}".format(training.current_exercise.name),0,0)
-    oled.text("disc/cont/adj",0,24)
+    bmp.button_icons3(bitmaps.X, bitmaps.PLAY, bitmaps.ADJUST)
     oled.show()
     while True:
         if btn_left.transition() == 1:
@@ -179,7 +174,7 @@ def s_after():
                 return("s_completed")
             else:
                 training.next_pending()
-                return("s_before")
+                return("s_select")
         if btn_right.transition() == 1:
             return("s_adjust")
 
@@ -188,7 +183,7 @@ def s_adjust():
     # print("Current weight for exercise {}: {}".format(training.current_exercise.name,training.current_exercise.weight))
     oled.text("{} Weight".format(training.current_exercise.name),0,0)
     oled.text("{}".format(training.current_exercise.weight),0,8)
-    oled.text("- / save / +",0,24)
+    bmp.button_icons3(bitmaps.MINUS, bitmaps.CHECK, bitmaps.PLUS)
     oled.show()
     while True:
         if btn_left.transition() == 1:
@@ -204,11 +199,11 @@ def s_adjust():
 def s_abort():
     oled.fill(0)
     oled.text("Abort training?",0,0)
-    oled.text("no / x / yes",0,24)
+    bmp.button_icons3(bitmaps.X, bitmaps.BLANK, bitmaps.CHECK)
     oled.show()
     while True:
         if btn_left.transition() == 1:
-            return("s_before")
+            return("s_select")
         if btn_right.transition() == 1:
             while not training.is_complete:
                 training.current_exercise.skip()
@@ -218,7 +213,7 @@ def s_abort():
 def s_discard():
     oled.fill(0)
     oled.text("Discard {}?".format(training.current_exercise.name),0,0)
-    oled.text("cancel/rst/skip",0,24)
+    bmp.button_icons3(bitmaps.X, bitmaps.RESTART, bitmaps.SKIP)
     oled.show()
     while True:
         if btn_left.transition() == 1:
@@ -228,14 +223,14 @@ def s_discard():
                 return("s_after")
         if btn_center.transition() == 1:
             training.current_exercise.reset()
-            return("s_before")
+            return("s_select")
         if btn_right.transition() == 1:
             training.current_exercise.skip()
             if training.is_complete:
                 return("s_completed")
             else:
                 training.next_pending()
-                return("s_before")
+                return("s_select")
 
 
 def s_completed():
@@ -258,7 +253,7 @@ def s_review():
     training.print_plan()
     oled.text("Printed review",0,0)
     oled.text("on serial out",0,8)
-    oled.text("x / OK / x",0,24)
+    bmp.button_icons3(bitmaps.BLANK, bitmaps.CHECK, bitmaps.BLANK)
     oled.show()
     while True:
         if btn_center.transition() == 1:
@@ -269,6 +264,7 @@ def s_exit():
 
 m = StateMachine()
 m.add_state("s_start",      s_start    )
+m.add_state("s_select",     s_select   )
 m.add_state("s_before",     s_before   )
 m.add_state("s_countdown",  s_countdown)
 m.add_state("s_paused",     s_paused   )

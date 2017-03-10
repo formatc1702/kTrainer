@@ -6,7 +6,7 @@ import ustruct
 
 class BitmapFont:
 
-    def __init__(self, width, height, pixel, font_name='font5x8.bin'):
+    def __init__(self, width, height, pixel, fill_rect, font_name='font5x8.bin'):
         # Specify the drawing area width and height, and the pixel function to
         # call when drawing pixels (should take an x and y param at least).
         # Optionally specify font_name to override the font file to use (default
@@ -20,6 +20,7 @@ class BitmapFont:
         self._width = width
         self._height = height
         self._pixel = pixel
+        self._fill_rect = fill_rect
         self._font_name = font_name
 
     def init(self):
@@ -59,9 +60,10 @@ class BitmapFont:
                 for char_y in range(self._font_height):
                     # Draw a pixel for each bit that's flipped on.
                     if (line >> char_y) & 0x1:
-                        for rr in range(0,size):
-                            for cc in range(0,size):
-                                self._pixel((x + char_x) * size + cc, (y + char_y) * size + rr, *args, **kwargs)
+                        self._fill_rect((x + char_x) * size, (y + char_y) * size, size, size, *args, **kwargs)
+                        # for rr in range(0,size):
+                        #     for cc in range(0,size):
+                        #         self._pixel((x + char_x) * size + cc, (y + char_y) * size + rr, *args, **kwargs)
 
     def text(self, text, x, y, *args, **kwargs):
         # Draw the specified text at the specified location.
