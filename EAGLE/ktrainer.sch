@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="7.4.0">
+<eagle version="6.5.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -1919,6 +1919,175 @@ Standard 1-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 </deviceset>
 </devicesets>
 </library>
+<library name="formatc1702-switches">
+<packages>
+<package name="SWITCH-SKRA-PKG">
+<smd name="P$1" x="-2.875" y="2" dx="2.75" dy="1" layer="1"/>
+<smd name="P$2" x="2.875" y="2" dx="2.75" dy="1" layer="1"/>
+<smd name="P$3" x="-2.84" y="-2" dx="2.75" dy="1" layer="1"/>
+<smd name="P$4" x="2.84" y="-2" dx="2.75" dy="1" layer="1"/>
+<circle x="0" y="0" radius="1.5" width="0.127" layer="20"/>
+<wire x1="-3" y1="-1" x2="-3" y2="1" width="0.127" layer="20"/>
+<wire x1="3" y1="1" x2="3" y2="-1" width="0.127" layer="20"/>
+<wire x1="-3" y1="3" x2="3" y2="3" width="0.127" layer="20"/>
+<wire x1="3" y1="-3" x2="-3" y2="-3" width="0.127" layer="20"/>
+</package>
+</packages>
+<symbols>
+<symbol name="TS2">
+<wire x1="2.032" y1="0" x2="2.54" y2="0" width="0.254" layer="94"/>
+<wire x1="1.905" y1="6.35" x2="1.905" y2="5.08" width="0.254" layer="94"/>
+<wire x1="1.905" y1="6.35" x2="0" y2="6.35" width="0.254" layer="94"/>
+<wire x1="-1.905" y1="6.35" x2="-1.905" y2="5.08" width="0.254" layer="94"/>
+<wire x1="0" y1="6.35" x2="0" y2="4.445" width="0.1524" layer="94"/>
+<wire x1="0" y1="6.35" x2="-1.905" y2="6.35" width="0.254" layer="94"/>
+<wire x1="0" y1="2.54" x2="0" y2="1.905" width="0.1524" layer="94"/>
+<wire x1="0" y1="1.27" x2="0" y2="0.635" width="0.1524" layer="94"/>
+<wire x1="0" y1="3.81" x2="0" y2="3.175" width="0.1524" layer="94"/>
+<wire x1="2.54" y1="-2.54" x2="2.54" y2="0" width="0.1524" layer="94"/>
+<wire x1="-2.54" y1="-2.54" x2="-2.54" y2="0" width="0.1524" layer="94"/>
+<wire x1="-2.54" y1="0" x2="2.032" y2="1.016" width="0.254" layer="94"/>
+<circle x="-2.54" y="0" radius="0.127" width="0.4064" layer="94"/>
+<circle x="2.54" y="0" radius="0.127" width="0.4064" layer="94"/>
+<text x="-1.905" y="6.985" size="1.778" layer="95">&gt;NAME</text>
+<pin name="S" x="-5.08" y="0" visible="off" length="short" direction="pas" swaplevel="1"/>
+<pin name="P" x="5.08" y="0" visible="off" length="short" direction="pas" swaplevel="2" rot="R180"/>
+<pin name="P@1" x="5.08" y="-2.54" visible="off" length="short" direction="pas" swaplevel="2" rot="R180"/>
+<pin name="S@1" x="-5.08" y="-2.54" visible="off" length="short" direction="pas" swaplevel="1"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="SWITCH-SKRA">
+<gates>
+<gate name="G$1" symbol="TS2" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="SWITCH-SKRA-PKG">
+<connects>
+<connect gate="G$1" pin="P" pad="P$1"/>
+<connect gate="G$1" pin="P@1" pad="P$2"/>
+<connect gate="G$1" pin="S" pad="P$3"/>
+<connect gate="G$1" pin="S@1" pad="P$4"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
+<library name="supply1">
+<description>&lt;b&gt;Supply Symbols&lt;/b&gt;&lt;p&gt;
+ GND, VCC, 0V, +5V, -5V, etc.&lt;p&gt;
+ Please keep in mind, that these devices are necessary for the
+ automatic wiring of the supply signals.&lt;p&gt;
+ The pin name defined in the symbol is identical to the net which is to be wired automatically.&lt;p&gt;
+ In this library the device names are the same as the pin names of the symbols, therefore the correct signal names appear next to the supply symbols in the schematic.&lt;p&gt;
+ &lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;</description>
+<packages>
+</packages>
+<symbols>
+<symbol name="GND">
+<wire x1="-1.905" y1="0" x2="1.905" y2="0" width="0.254" layer="94"/>
+<text x="-2.54" y="-2.54" size="1.778" layer="96">&gt;VALUE</text>
+<pin name="GND" x="0" y="2.54" visible="off" length="short" direction="sup" rot="R270"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="GND" prefix="GND">
+<description>&lt;b&gt;SUPPLY SYMBOL&lt;/b&gt;</description>
+<gates>
+<gate name="1" symbol="GND" x="0" y="0"/>
+</gates>
+<devices>
+<device name="">
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
+<library name="buzzer">
+<description>&lt;b&gt;Speakers and Buzzers&lt;/b&gt;&lt;p&gt;
+&lt;ul&gt;Distributors:
+&lt;li&gt;Buerklin
+&lt;li&gt;Spoerle
+&lt;li&gt;Schukat
+&lt;/ul&gt;
+&lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;</description>
+<packages>
+<package name="F/CM12P">
+<description>&lt;b&gt;BUZZER&lt;/b&gt;</description>
+<wire x1="3.175" y1="3.048" x2="4.445" y2="3.048" width="0.254" layer="21"/>
+<wire x1="3.81" y1="3.683" x2="3.81" y2="2.413" width="0.254" layer="21"/>
+<circle x="0" y="0" radius="6.985" width="0.1524" layer="21"/>
+<circle x="0" y="0" radius="1.27" width="0.1524" layer="21"/>
+<circle x="3.81" y="3.048" radius="1.27" width="0.1524" layer="21"/>
+<pad name="-" x="-3.81" y="0" drill="1.016" diameter="2.54" shape="octagon"/>
+<pad name="+" x="3.81" y="0" drill="1.016" diameter="2.54" shape="octagon"/>
+<text x="2.54" y="6.985" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-4.445" y="-3.81" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+</package>
+</packages>
+<symbols>
+<symbol name="B2P">
+<wire x1="-1.27" y1="3.175" x2="0" y2="3.175" width="0.1524" layer="94"/>
+<wire x1="0" y1="3.175" x2="0" y2="3.81" width="0.1524" layer="94"/>
+<wire x1="0" y1="3.175" x2="0" y2="2.54" width="0.1524" layer="94"/>
+<wire x1="0.635" y1="4.445" x2="0.635" y2="1.905" width="0.1524" layer="94"/>
+<wire x1="0.635" y1="1.905" x2="1.905" y2="1.905" width="0.1524" layer="94"/>
+<wire x1="1.905" y1="1.905" x2="1.905" y2="4.445" width="0.1524" layer="94"/>
+<wire x1="1.905" y1="4.445" x2="0.635" y2="4.445" width="0.1524" layer="94"/>
+<wire x1="2.54" y1="3.81" x2="2.54" y2="3.175" width="0.1524" layer="94"/>
+<wire x1="2.54" y1="3.175" x2="3.81" y2="3.175" width="0.1524" layer="94"/>
+<wire x1="2.54" y1="3.175" x2="2.54" y2="2.54" width="0.1524" layer="94"/>
+<wire x1="2.54" y1="-2.54" x2="2.54" y2="1.27" width="0.1524" layer="94"/>
+<wire x1="0" y1="-2.54" x2="0" y2="1.27" width="0.1524" layer="94"/>
+<wire x1="-2.54" y1="1.27" x2="0" y2="1.27" width="0.254" layer="94"/>
+<wire x1="5.08" y1="1.27" x2="5.08" y2="5.08" width="0.254" layer="94"/>
+<wire x1="5.08" y1="5.08" x2="5.715" y2="5.08" width="0.254" layer="94"/>
+<wire x1="5.715" y1="5.08" x2="5.715" y2="5.715" width="0.254" layer="94"/>
+<wire x1="5.715" y1="5.715" x2="-3.175" y2="5.715" width="0.254" layer="94"/>
+<wire x1="-3.175" y1="5.715" x2="-3.175" y2="5.08" width="0.254" layer="94"/>
+<wire x1="-3.175" y1="5.08" x2="-2.54" y2="5.08" width="0.254" layer="94"/>
+<wire x1="-2.54" y1="5.08" x2="-2.54" y2="1.27" width="0.254" layer="94"/>
+<wire x1="-2.54" y1="5.08" x2="5.08" y2="5.08" width="0.254" layer="94"/>
+<wire x1="2.54" y1="1.27" x2="5.08" y2="1.27" width="0.254" layer="94"/>
+<wire x1="0" y1="1.27" x2="2.54" y2="1.27" width="0.254" layer="94"/>
+<text x="-2.54" y="6.35" size="1.778" layer="95">&gt;NAME</text>
+<text x="6.35" y="0" size="1.778" layer="96">&gt;VALUE</text>
+<pin name="2" x="5.08" y="-2.54" visible="pad" length="short" direction="pas" rot="R180"/>
+<pin name="1" x="-2.54" y="-2.54" visible="pad" length="short" direction="pas"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="F/CM12P" prefix="SG">
+<description>&lt;b&gt;BUZZER&lt;/b&gt;&lt;p&gt; Source: Buerklin</description>
+<gates>
+<gate name="G$1" symbol="B2P" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="F/CM12P">
+<connects>
+<connect gate="G$1" pin="1" pad="+"/>
+<connect gate="G$1" pin="2" pad="-"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="MF" value="" constant="no"/>
+<attribute name="MPN" value="" constant="no"/>
+<attribute name="OC_FARNELL" value="unknown" constant="no"/>
+<attribute name="OC_NEWARK" value="unknown" constant="no"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -1940,6 +2109,15 @@ Standard 1-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 <part name="JP7" library="SparkFun-Connectors" deviceset="M01" device="NOSILK-KIT"/>
 <part name="JP8" library="SparkFun-Connectors" deviceset="M01" device="NOSILK-KIT"/>
 <part name="JP9" library="SparkFun-Connectors" deviceset="M01" device="NOSILK-KIT"/>
+<part name="PB1" library="formatc1702-switches" deviceset="SWITCH-SKRA" device=""/>
+<part name="PB2" library="formatc1702-switches" deviceset="SWITCH-SKRA" device=""/>
+<part name="PB3" library="formatc1702-switches" deviceset="SWITCH-SKRA" device=""/>
+<part name="PB4" library="formatc1702-switches" deviceset="SWITCH-SKRA" device=""/>
+<part name="GND1" library="supply1" deviceset="GND" device=""/>
+<part name="GND2" library="supply1" deviceset="GND" device=""/>
+<part name="GND3" library="supply1" deviceset="GND" device=""/>
+<part name="GND4" library="supply1" deviceset="GND" device=""/>
+<part name="SG1" library="buzzer" deviceset="F/CM12P" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -1969,6 +2147,15 @@ Wemos +5V pin --&gt; V_IN pin (3.7V from LiPo)</text>
 <instance part="JP9" gate="G$1" x="40.64" y="53.34" smashed="yes" rot="R180">
 <attribute name="VALUE" x="43.18" y="58.42" size="1.778" layer="96" rot="R180"/>
 </instance>
+<instance part="PB1" gate="G$1" x="58.42" y="182.88"/>
+<instance part="PB2" gate="G$1" x="76.2" y="182.88"/>
+<instance part="PB3" gate="G$1" x="93.98" y="182.88"/>
+<instance part="PB4" gate="G$1" x="111.76" y="182.88"/>
+<instance part="GND1" gate="1" x="63.5" y="167.64"/>
+<instance part="GND2" gate="1" x="81.28" y="167.64"/>
+<instance part="GND3" gate="1" x="99.06" y="167.64"/>
+<instance part="GND4" gate="1" x="116.84" y="167.64"/>
+<instance part="SG1" gate="G$1" x="124.46" y="101.6"/>
 </instances>
 <busses>
 </busses>
@@ -2042,6 +2229,38 @@ Wemos +5V pin --&gt; V_IN pin (3.7V from LiPo)</text>
 <wire x1="15.24" y1="66.04" x2="33.02" y2="66.04" width="0.1524" layer="91"/>
 <label x="20.32" y="66.04" size="1.778" layer="95"/>
 </segment>
+<segment>
+<pinref part="PB1" gate="G$1" pin="P"/>
+<wire x1="63.5" y1="182.88" x2="63.5" y2="180.34" width="0.1524" layer="91"/>
+<pinref part="GND1" gate="1" pin="GND"/>
+<pinref part="PB1" gate="G$1" pin="P@1"/>
+<wire x1="63.5" y1="180.34" x2="63.5" y2="170.18" width="0.1524" layer="91"/>
+<junction x="63.5" y="180.34"/>
+</segment>
+<segment>
+<pinref part="PB2" gate="G$1" pin="P"/>
+<wire x1="81.28" y1="182.88" x2="81.28" y2="180.34" width="0.1524" layer="91"/>
+<pinref part="GND2" gate="1" pin="GND"/>
+<pinref part="PB2" gate="G$1" pin="P@1"/>
+<wire x1="81.28" y1="180.34" x2="81.28" y2="170.18" width="0.1524" layer="91"/>
+<junction x="81.28" y="180.34"/>
+</segment>
+<segment>
+<pinref part="PB3" gate="G$1" pin="P"/>
+<wire x1="99.06" y1="182.88" x2="99.06" y2="180.34" width="0.1524" layer="91"/>
+<pinref part="GND3" gate="1" pin="GND"/>
+<pinref part="PB3" gate="G$1" pin="P@1"/>
+<wire x1="99.06" y1="180.34" x2="99.06" y2="170.18" width="0.1524" layer="91"/>
+<junction x="99.06" y="180.34"/>
+</segment>
+<segment>
+<pinref part="PB4" gate="G$1" pin="P"/>
+<wire x1="116.84" y1="182.88" x2="116.84" y2="180.34" width="0.1524" layer="91"/>
+<pinref part="GND4" gate="1" pin="GND"/>
+<pinref part="PB4" gate="G$1" pin="P@1"/>
+<wire x1="116.84" y1="180.34" x2="116.84" y2="170.18" width="0.1524" layer="91"/>
+<junction x="116.84" y="180.34"/>
+</segment>
 </net>
 <net name="D4" class="0">
 <segment>
@@ -2090,6 +2309,42 @@ Wemos +5V pin --&gt; V_IN pin (3.7V from LiPo)</text>
 <pinref part="JP9" gate="G$1" pin="1"/>
 <wire x1="33.02" y1="53.34" x2="15.24" y2="53.34" width="0.1524" layer="91"/>
 <label x="20.32" y="53.34" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="N$1" class="0">
+<segment>
+<pinref part="PB1" gate="G$1" pin="S"/>
+<wire x1="53.34" y1="182.88" x2="53.34" y2="180.34" width="0.1524" layer="91"/>
+<pinref part="PB1" gate="G$1" pin="S@1"/>
+<wire x1="53.34" y1="180.34" x2="53.34" y2="170.18" width="0.1524" layer="91"/>
+<junction x="53.34" y="180.34"/>
+</segment>
+</net>
+<net name="N$2" class="0">
+<segment>
+<pinref part="PB2" gate="G$1" pin="S"/>
+<wire x1="71.12" y1="182.88" x2="71.12" y2="180.34" width="0.1524" layer="91"/>
+<pinref part="PB2" gate="G$1" pin="S@1"/>
+<wire x1="71.12" y1="180.34" x2="71.12" y2="170.18" width="0.1524" layer="91"/>
+<junction x="71.12" y="180.34"/>
+</segment>
+</net>
+<net name="N$3" class="0">
+<segment>
+<pinref part="PB3" gate="G$1" pin="S"/>
+<wire x1="88.9" y1="182.88" x2="88.9" y2="180.34" width="0.1524" layer="91"/>
+<pinref part="PB3" gate="G$1" pin="S@1"/>
+<wire x1="88.9" y1="180.34" x2="88.9" y2="170.18" width="0.1524" layer="91"/>
+<junction x="88.9" y="180.34"/>
+</segment>
+</net>
+<net name="N$4" class="0">
+<segment>
+<pinref part="PB4" gate="G$1" pin="S"/>
+<wire x1="106.68" y1="182.88" x2="106.68" y2="180.34" width="0.1524" layer="91"/>
+<pinref part="PB4" gate="G$1" pin="S@1"/>
+<wire x1="106.68" y1="180.34" x2="106.68" y2="170.18" width="0.1524" layer="91"/>
+<junction x="106.68" y="180.34"/>
 </segment>
 </net>
 </nets>
