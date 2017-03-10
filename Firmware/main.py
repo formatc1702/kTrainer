@@ -47,15 +47,32 @@ def s_select():
 
 def s_before():
     oled.fill(0)
-    # print("About to start exercise {} with weight {} and params: {}".format(training.current_exercise.name, training.current_exercise.weight, training.current_exercise.params))
-    #oled.text("Exercise {}".format(training.current_exercise.name),0,0)
-    # print("(SKIPPED)" if training.current_exercise.skipped else ("(DONE)" if training.current_exercise.done else "(PENDING)"))
-    oled.framebuf.fill_rect(0,0,52,18,1)
-    bf.text("{:^4}".format(training.current_exercise.name),1,1,2,0)
-    oled.text("{:>3}".format(training.current_exercise.weight),54,1)
-    oled.text("S" if training.current_exercise.skipped else ("D" if training.current_exercise.done else "P"),100,1)
-    bmp.button_icons3(bitmaps.X, bitmaps.PLAY, bitmaps.RIGHT)
+    oled.framebuf.fill_rect(0,0,26,18,1)
+    n = training.current_exercise.name
+    if len(n) <= 2:
+        bf.text(n,1,1,2,0)
+    else:
+        bf.text(n[0],   1, 1,2,0)
+        bf.text(n[1],  14, 2,1,0)
+        bf.text(n[2:4],14,10,1,0)
+
+    bmp.draw_bitmap(bitmaps.WEIGHT,28,0)
+    oled.text("{:>3}".format(training.current_exercise.weight), 40,0)
+
+    if   training.current_exercise.skipped:
+        bmp_status = bitmaps.SKIPPED
+    elif training.current_exercise.done:
+        bmp_status = bitmaps.DONE
+    else:
+        bmp_status = bitmaps.PENDING
+    bmp.draw_bitmap(bmp_status, 44, 12)
+
+    for i, k in enumerate(training.current_exercise.params.items()):
+        oled.text("{} {:>2}".format(k[0][0],k[1][0:2]),74,8*i)
+
+    bmp.button_icons4(bitmaps.LEFT, bitmaps.X, bitmaps.PLAY, bitmaps.RIGHT)
     oled.show()
+
     while True:
         if btn_left.transition() == 1:
             return("s_abort")
@@ -109,7 +126,6 @@ def s_paused():
 
 def s_go_up():
     now = time.ticks_ms()
-    # print(training.current_exercise.reps, "^", end="")
     oled.fill(0)
     oled.text("^ {}".format(training.current_exercise.reps),0,0)
     bmp.button_icons3(bitmaps.BLANK, bitmaps.PAUSE, bitmaps.BLANK)
@@ -180,7 +196,6 @@ def s_after():
 
 def s_adjust():
     oled.fill(0)
-    # print("Current weight for exercise {}: {}".format(training.current_exercise.name,training.current_exercise.weight))
     oled.text("{} Weight".format(training.current_exercise.name),0,0)
     oled.text("{}".format(training.current_exercise.weight),0,8)
     bmp.button_icons3(bitmaps.MINUS, bitmaps.CHECK, bitmaps.PLUS)
@@ -190,7 +205,6 @@ def s_adjust():
             training.current_exercise.weight -= 2
             return("s_adjust")
         if btn_center.transition() == 1:
-            # print("Set weight for exercise {}: {}".format(training.current_exercise.name,training.current_exercise.weight))
             return("s_after")
         if btn_right.transition() == 1:
             training.current_exercise.weight += 2
@@ -262,6 +276,9 @@ def s_review():
 def s_exit():
     return(s_exit, None)
 
+import micropython
+micropython.mem_info(1)
+
 m = StateMachine()
 m.add_state("s_start",      s_start    )
 m.add_state("s_select",     s_select   )
@@ -280,5 +297,8 @@ m.add_state("s_completed",  s_completed)
 m.add_state("s_review",     s_review   )
 m.add_state("s_exit", None, end_state=1)
 m.set_start("s_start")
+
+import micropython
+micropython.mem_info(1)
 
 m.run()
