@@ -656,7 +656,7 @@ wide body 7.5 mm/JEDEC MS-013AA</description>
 </library>
 <library name="formatc1702-pcbs">
 <packages>
-<package name="TP4056-LIPO-CHG-PCB-PACKAGE">
+<package name="TP4056-PCB-HOLE">
 <wire x1="-8.89" y1="-13.97" x2="8.89" y2="-13.97" width="0.127" layer="21"/>
 <wire x1="8.89" y1="-13.97" x2="8.89" y2="12.7" width="0.127" layer="21"/>
 <wire x1="8.89" y1="12.7" x2="-8.89" y2="12.7" width="0.127" layer="21"/>
@@ -678,7 +678,7 @@ wide body 7.5 mm/JEDEC MS-013AA</description>
 <pad name="B+" x="-4.445" y="10.795" drill="0.8" diameter="1.9304"/>
 <pad name="OUT+" x="-6.985" y="10.795" drill="0.8" diameter="1.9304"/>
 </package>
-<package name="SSD1306-OLED-128X64-I2C-PACKAGE">
+<package name="SSD1306-OLED-128X64-HOLE">
 <wire x1="-14" y1="14" x2="14" y2="14" width="0.127" layer="21"/>
 <wire x1="14" y1="14" x2="14" y2="-14" width="0.127" layer="21"/>
 <wire x1="14" y1="-14" x2="-14" y2="-14" width="0.127" layer="21"/>
@@ -696,7 +696,7 @@ wide body 7.5 mm/JEDEC MS-013AA</description>
 <wire x1="11.5" y1="-3.5" x2="-11" y2="-3.5" width="0.127" layer="21"/>
 <wire x1="-11" y1="-3.5" x2="-11" y2="7.5" width="0.127" layer="21"/>
 </package>
-<package name="POLOLU-S7V8F3-3V3-STEP-UP-DOWN-PACKAGE">
+<package name="POLOLU-S7V8F3-HOLE">
 <pad name="GND" x="-1.27" y="0" drill="0.8" diameter="1.778" shape="square" rot="R90"/>
 <pad name="VIN" x="1.27" y="0" drill="0.8" diameter="1.778" rot="R90"/>
 <pad name="VOUT" x="-3.81" y="0" drill="0.8" diameter="1.778" rot="R90"/>
@@ -706,109 +706,81 @@ wide body 7.5 mm/JEDEC MS-013AA</description>
 <wire x1="5.715" y1="15.24" x2="5.715" y2="-1.27" width="0.127" layer="21"/>
 <wire x1="5.715" y1="-1.27" x2="-5.715" y2="-1.27" width="0.127" layer="21"/>
 </package>
-</packages>
-<symbols>
-<symbol name="TP4056-LIPO-CHG-PCB-SYMBOL">
-<pin name="IN+" x="-15.24" y="2.54" length="middle" direction="sup"/>
-<pin name="IN-" x="-15.24" y="-2.54" length="middle" direction="sup"/>
-<pin name="OUT+" x="15.24" y="2.54" length="middle" direction="sup" rot="R180"/>
-<pin name="B+" x="-2.54" y="-15.24" length="middle" direction="sup" rot="R90"/>
-<pin name="B-" x="2.54" y="-15.24" length="middle" direction="sup" rot="R90"/>
-<pin name="OUT-" x="15.24" y="-2.54" length="middle" direction="sup" rot="R180"/>
-<wire x1="-10.16" y1="-10.16" x2="-10.16" y2="5.08" width="0.254" layer="94"/>
-<wire x1="-10.16" y1="5.08" x2="10.16" y2="5.08" width="0.254" layer="94"/>
-<wire x1="10.16" y1="5.08" x2="10.16" y2="-10.16" width="0.254" layer="94"/>
-<wire x1="10.16" y1="-10.16" x2="-10.16" y2="-10.16" width="0.254" layer="94"/>
-</symbol>
-<symbol name="SSD1306-OLED-128X64-I2C-SYMBOL">
-<pin name="VCC" x="-7.62" y="-5.08" length="middle" direction="sup" rot="R90"/>
-<pin name="GND" x="-2.54" y="-5.08" length="middle" direction="sup" rot="R90"/>
-<pin name="SCL" x="2.54" y="-5.08" length="middle" direction="in" rot="R90"/>
-<pin name="SDA" x="7.62" y="-5.08" length="middle" rot="R90"/>
-<wire x1="-10.16" y1="0" x2="10.16" y2="0" width="0.254" layer="94"/>
-<wire x1="10.16" y1="0" x2="10.16" y2="20.32" width="0.254" layer="94"/>
-<wire x1="10.16" y1="20.32" x2="-10.16" y2="20.32" width="0.254" layer="94"/>
-<wire x1="-10.16" y1="20.32" x2="-10.16" y2="0" width="0.254" layer="94"/>
-<wire x1="-7.62" y1="10.16" x2="-7.62" y2="17.78" width="0.254" layer="94"/>
-<wire x1="-7.62" y1="17.78" x2="7.62" y2="17.78" width="0.254" layer="94"/>
-<wire x1="7.62" y1="17.78" x2="7.62" y2="10.16" width="0.254" layer="94"/>
-<wire x1="7.62" y1="10.16" x2="-7.62" y2="10.16" width="0.254" layer="94"/>
-<text x="0" y="13.97" size="1.27" layer="94" align="center">SSD1306
-OLED (I2C)</text>
-</symbol>
-<symbol name="POLOLU-S7V8F3-3V3-STEP-UP-DOWN-SYMBOL">
-<wire x1="-7.62" y1="5.08" x2="7.62" y2="5.08" width="0.254" layer="94"/>
-<wire x1="7.62" y1="5.08" x2="7.62" y2="-12.7" width="0.254" layer="94"/>
-<wire x1="7.62" y1="-12.7" x2="-7.62" y2="-12.7" width="0.254" layer="94"/>
-<wire x1="-7.62" y1="-12.7" x2="-7.62" y2="5.08" width="0.254" layer="94"/>
-<pin name="VIN" x="-12.7" y="2.54" length="middle" direction="sup"/>
-<pin name="VOUT" x="12.7" y="2.54" length="middle" direction="sup" rot="R180"/>
-<pin name="GND" x="0" y="-17.78" length="middle" direction="pwr" rot="R90"/>
-<pin name="/SHDN" x="-12.7" y="-2.54" length="middle" direction="in" function="dot"/>
-</symbol>
-</symbols>
-<devicesets>
-<deviceset name="TP4056-LIPO-CHG-PCB">
-<description>TP4056-based LiPo charger module</description>
-<gates>
-<gate name="G$1" symbol="TP4056-LIPO-CHG-PCB-SYMBOL" x="0" y="0"/>
-</gates>
-<devices>
-<device name="" package="TP4056-LIPO-CHG-PCB-PACKAGE">
-<connects>
-<connect gate="G$1" pin="B+" pad="B+"/>
-<connect gate="G$1" pin="B-" pad="B-"/>
-<connect gate="G$1" pin="IN+" pad="IN+"/>
-<connect gate="G$1" pin="IN-" pad="IN-"/>
-<connect gate="G$1" pin="OUT+" pad="OUT+"/>
-<connect gate="G$1" pin="OUT-" pad="OUT-"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
-<deviceset name="SSD1306-OLED-128X64-I2C">
-<gates>
-<gate name="G$1" symbol="SSD1306-OLED-128X64-I2C-SYMBOL" x="0" y="0"/>
-</gates>
-<devices>
-<device name="" package="SSD1306-OLED-128X64-I2C-PACKAGE">
-<connects>
-<connect gate="G$1" pin="GND" pad="GND"/>
-<connect gate="G$1" pin="SCL" pad="SCL"/>
-<connect gate="G$1" pin="SDA" pad="SDA"/>
-<connect gate="G$1" pin="VCC" pad="VCC"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
-<deviceset name="POLOLU-S7V8F3-3V3-STEP-UP-DOWN">
-<gates>
-<gate name="G$1" symbol="POLOLU-S7V8F3-3V3-STEP-UP-DOWN-SYMBOL" x="0" y="0"/>
-</gates>
-<devices>
-<device name="" package="POLOLU-S7V8F3-3V3-STEP-UP-DOWN-PACKAGE">
-<connects>
-<connect gate="G$1" pin="/SHDN" pad="SHDN"/>
-<connect gate="G$1" pin="GND" pad="GND"/>
-<connect gate="G$1" pin="VIN" pad="VIN"/>
-<connect gate="G$1" pin="VOUT" pad="VOUT"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
-</devicesets>
-</library>
-<library name="esp8266modules">
-<packages>
+<package name="POLOLU-S7V8F3-SMD">
+<wire x1="-5.715" y1="-1.27" x2="-5.715" y2="15.24" width="0.127" layer="21"/>
+<wire x1="-5.715" y1="15.24" x2="5.715" y2="15.24" width="0.127" layer="21"/>
+<wire x1="5.715" y1="15.24" x2="5.715" y2="-1.27" width="0.127" layer="21"/>
+<wire x1="5.715" y1="-1.27" x2="-5.715" y2="-1.27" width="0.127" layer="21"/>
+<smd name="VOUT" x="-3.81" y="0" dx="2.032" dy="2.032" layer="1" roundness="100"/>
+<smd name="GND" x="-1.27" y="0" dx="2.032" dy="2.032" layer="1"/>
+<smd name="VIN" x="1.27" y="0" dx="2.032" dy="2.032" layer="1" roundness="100"/>
+<smd name="SHDN" x="3.81" y="0" dx="2.032" dy="2.032" layer="1" roundness="100"/>
+</package>
+<package name="WEMOS-D1-MINI-SMD">
+<wire x1="7.9" y1="17.756" x2="7.9" y2="11.956" width="0.127" layer="21"/>
+<wire x1="-8.1" y1="11.956" x2="-8.1" y2="17.756" width="0.127" layer="21"/>
+<wire x1="-8.1" y1="17.756" x2="7.9" y2="17.756" width="0.127" layer="21"/>
+<wire x1="-8.1" y1="11.956" x2="7.9" y2="11.956" width="0.127" layer="21"/>
+<text x="-3.81" y="-3.81" size="1.4224" layer="21">WeMos.cc
+D1 mini</text>
+<text x="11.43" y="-15.24" size="1.4224" layer="25" align="bottom-right">&gt;Name</text>
+<wire x1="-8.1026" y1="11.9634" x2="-8.1026" y2="-6.35" width="0.127" layer="21"/>
+<wire x1="7.874" y1="11.9634" x2="7.8994" y2="11.9634" width="0.127" layer="21"/>
+<wire x1="7.8994" y1="11.9634" x2="7.8994" y2="-6.35" width="0.127" layer="21"/>
+<wire x1="12.7" y1="15.24" x2="12.7" y2="-16.51" width="0.127" layer="21"/>
+<wire x1="-10.16" y1="17.78" x2="10.16" y2="17.78" width="0.127" layer="21"/>
+<wire x1="-12.7" y1="15.24" x2="-10.16" y2="17.78" width="0.127" layer="21" curve="-90"/>
+<wire x1="10.16" y1="17.78" x2="12.7" y2="15.24" width="0.127" layer="21" curve="-90"/>
+<wire x1="-12.7" y1="15.24" x2="-12.7" y2="-16.51" width="0.127" layer="21"/>
+<wire x1="-12.7" y1="-16.51" x2="12.7" y2="-16.51" width="0.127" layer="21"/>
+<wire x1="-8.1026" y1="-6.35" x2="7.874" y2="-6.35" width="0.127" layer="21"/>
+<text x="-10.16" y="10.16" size="0.762" layer="25" align="center-left">RST</text>
+<text x="-10.16" y="7.62" size="0.762" layer="25" align="center-left">A0</text>
+<text x="-10.16" y="5.08" size="0.762" layer="25" align="center-left">D0</text>
+<text x="-10.16" y="2.54" size="0.762" layer="25" align="center-left">D5</text>
+<text x="-10.16" y="0" size="0.762" layer="25" align="center-left">D6</text>
+<text x="-10.16" y="-2.54" size="0.762" layer="25" align="center-left">D7</text>
+<text x="-10.16" y="-5.08" size="0.762" layer="25" align="center-left">D8</text>
+<text x="-10.16" y="-7.62" size="0.762" layer="25" align="center-left">3V3</text>
+<text x="10.16" y="-7.62" size="0.762" layer="25" rot="R180" align="center-left">5V</text>
+<text x="10.16" y="-5.08" size="0.762" layer="25" rot="R180" align="center-left">GND</text>
+<text x="10.16" y="-2.54" size="0.762" layer="25" rot="R180" align="center-left">D4</text>
+<text x="10.16" y="0" size="0.762" layer="25" rot="R180" align="center-left">D3</text>
+<text x="10.16" y="2.54" size="0.762" layer="25" rot="R180" align="center-left">D2</text>
+<text x="10.16" y="5.08" size="0.762" layer="25" rot="R180" align="center-left">D1</text>
+<text x="10.16" y="7.62" size="0.762" layer="25" rot="R180" align="center-left">RX</text>
+<text x="10.16" y="10.16" size="0.762" layer="25" rot="R180" align="center-left">TX</text>
+<wire x1="-3.81" y1="-16.51" x2="3.81" y2="-16.51" width="0.2032" layer="21"/>
+<wire x1="3.81" y1="-16.51" x2="3.81" y2="-11.43" width="0.2032" layer="21"/>
+<wire x1="3.81" y1="-11.43" x2="-3.81" y2="-11.43" width="0.2032" layer="21"/>
+<wire x1="-3.81" y1="-11.43" x2="-3.81" y2="-16.51" width="0.2032" layer="21"/>
+<text x="0" y="15.24" size="1.4224" layer="25" align="center">ANTENNA
+KEEP CLEAR</text>
+<text x="0" y="-13.97" size="1.016" layer="25" align="center">USB
+MICRO</text>
+<wire x1="-7.62" y1="-10.16" x2="-11.43" y2="-10.16" width="0.2032" layer="21"/>
+<wire x1="-11.43" y1="-10.16" x2="-11.43" y2="-15.24" width="0.2032" layer="21"/>
+<wire x1="-11.43" y1="-15.24" x2="-7.62" y2="-15.24" width="0.2032" layer="21"/>
+<wire x1="-7.62" y1="-15.24" x2="-7.62" y2="-10.16" width="0.2032" layer="21"/>
+<text x="-9.525" y="-12.7" size="0.635" layer="25" align="center">RESET
+SWITCH</text>
+<smd name="RESET" x="-11.43" y="10.16" dx="2.032" dy="2.032" layer="1" roundness="100"/>
+<smd name="A0" x="-11.43" y="7.62" dx="2.032" dy="2.032" layer="1" roundness="100"/>
+<smd name="D0" x="-11.43" y="5.08" dx="2.032" dy="2.032" layer="1" roundness="100"/>
+<smd name="D5" x="-11.43" y="2.54" dx="2.032" dy="2.032" layer="1" roundness="100"/>
+<smd name="D6" x="-11.43" y="0" dx="2.032" dy="2.032" layer="1" roundness="100"/>
+<smd name="D7" x="-11.43" y="-2.54" dx="2.032" dy="2.032" layer="1" roundness="100"/>
+<smd name="D8" x="-11.43" y="-5.08" dx="2.032" dy="2.032" layer="1" roundness="100"/>
+<smd name="3V3" x="-11.43" y="-7.62" dx="2.032" dy="2.032" layer="1" roundness="100"/>
+<smd name="TX" x="11.43" y="10.16" dx="2.032" dy="2.032" layer="1" roundness="100"/>
+<smd name="RX" x="11.43" y="7.62" dx="2.032" dy="2.032" layer="1" roundness="100"/>
+<smd name="D1" x="11.43" y="5.08" dx="2.032" dy="2.032" layer="1" roundness="100"/>
+<smd name="D2" x="11.43" y="2.54" dx="2.032" dy="2.032" layer="1" roundness="100"/>
+<smd name="D3" x="11.43" y="0" dx="2.032" dy="2.032" layer="1" roundness="100"/>
+<smd name="D4" x="11.43" y="-2.54" dx="2.032" dy="2.032" layer="1" roundness="100"/>
+<smd name="GND" x="11.43" y="-5.08" dx="2.032" dy="2.032" layer="1" roundness="100"/>
+<smd name="5V" x="11.43" y="-7.62" dx="2.032" dy="2.032" layer="1" roundness="100"/>
+</package>
 <package name="WEMOS-D1-MINI">
 <description>WeMos.cc
 D1 mini
@@ -877,8 +849,86 @@ MICRO</text>
 <text x="-8.255" y="-15.24" size="0.635" layer="25" align="center">RESET
 SWITCH</text>
 </package>
+<package name="TP4056-PCB-SMD">
+<wire x1="-8.89" y1="-12.7" x2="8.89" y2="-12.7" width="0.127" layer="21"/>
+<wire x1="8.89" y1="-12.7" x2="8.89" y2="13.97" width="0.127" layer="21"/>
+<wire x1="8.89" y1="13.97" x2="-8.89" y2="13.97" width="0.127" layer="21"/>
+<wire x1="-8.89" y1="13.97" x2="-8.89" y2="-12.7" width="0.127" layer="21"/>
+<wire x1="-3.81" y1="-13.97" x2="-3.81" y2="-7.62" width="0.127" layer="21"/>
+<wire x1="-3.81" y1="-7.62" x2="3.81" y2="-7.62" width="0.127" layer="21"/>
+<wire x1="3.81" y1="-7.62" x2="3.81" y2="-13.97" width="0.127" layer="21"/>
+<wire x1="3.81" y1="-13.97" x2="-3.81" y2="-13.97" width="0.127" layer="21"/>
+<text x="-6.985" y="-7.62" size="2.54" layer="27" font="fixed" align="center">+</text>
+<text x="6.985" y="-7.62" size="2.54" layer="27" font="fixed" align="center">-</text>
+<text x="-6.985" y="10.16" size="2.54" layer="27" font="fixed" rot="R90" align="center-right">OUT+</text>
+<text x="-1.905" y="13.335" size="2.54" layer="27" font="fixed" rot="R90" align="center-right">B+</text>
+<text x="1.905" y="13.335" size="2.54" layer="27" font="fixed" rot="R90" align="center-right">B-</text>
+<text x="6.985" y="10.16" size="2.54" layer="27" font="fixed" rot="R90" align="center-right">OUT-</text>
+<smd name="IN+" x="-6.985" y="-10.795" dx="2.032" dy="2.032" layer="1" roundness="100"/>
+<smd name="OUT+" x="-6.985" y="12.065" dx="2.032" dy="2.032" layer="1" roundness="100"/>
+<smd name="B+" x="-4.445" y="12.065" dx="2.032" dy="2.032" layer="1" roundness="100"/>
+<smd name="B-" x="4.445" y="12.065" dx="2.032" dy="2.032" layer="1" roundness="100"/>
+<smd name="OUT-" x="6.985" y="12.065" dx="2.032" dy="2.032" layer="1" roundness="100"/>
+<smd name="IN-" x="6.985" y="-10.795" dx="2.032" dy="2.032" layer="1" roundness="100"/>
+</package>
+<package name="SSD1306-OLED-128X64-SMD">
+<wire x1="-14" y1="14" x2="14" y2="14" width="0.127" layer="21"/>
+<wire x1="14" y1="14" x2="14" y2="-14" width="0.127" layer="21"/>
+<wire x1="14" y1="-14" x2="-14" y2="-14" width="0.127" layer="21"/>
+<wire x1="-14" y1="-14" x2="-14" y2="14" width="0.127" layer="21"/>
+<wire x1="-13.5" y1="9.5" x2="13.5" y2="9.5" width="0.127" layer="21"/>
+<wire x1="13.5" y1="9.5" x2="13.5" y2="-9.5" width="0.127" layer="21"/>
+<wire x1="13.5" y1="-9.5" x2="-13.5" y2="-9.5" width="0.127" layer="21"/>
+<wire x1="-13.5" y1="-9.5" x2="-13.5" y2="9.5" width="0.127" layer="21"/>
+<wire x1="-11" y1="7.5" x2="11.5" y2="7.5" width="0.127" layer="21"/>
+<wire x1="11.5" y1="7.5" x2="11.5" y2="-3.5" width="0.127" layer="21"/>
+<wire x1="11.5" y1="-3.5" x2="-11" y2="-3.5" width="0.127" layer="21"/>
+<wire x1="-11" y1="-3.5" x2="-11" y2="7.5" width="0.127" layer="21"/>
+<smd name="VCC" x="-3.81" y="12.7" dx="2.032" dy="2.032" layer="1" roundness="100"/>
+<smd name="GND" x="-1.27" y="12.7" dx="2.032" dy="2.032" layer="1" roundness="100"/>
+<smd name="SCL" x="1.27" y="12.7" dx="2.032" dy="2.032" layer="1" roundness="100"/>
+<smd name="SDA" x="3.81" y="12.7" dx="2.032" dy="2.032" layer="1" roundness="100"/>
+</package>
 </packages>
 <symbols>
+<symbol name="TP4056-LIPO-CHG-PCB-SYMBOL">
+<pin name="IN+" x="-15.24" y="2.54" length="middle" direction="sup"/>
+<pin name="IN-" x="-15.24" y="-2.54" length="middle" direction="sup"/>
+<pin name="OUT+" x="15.24" y="2.54" length="middle" direction="sup" rot="R180"/>
+<pin name="B+" x="-2.54" y="-15.24" length="middle" direction="sup" rot="R90"/>
+<pin name="B-" x="2.54" y="-15.24" length="middle" direction="sup" rot="R90"/>
+<pin name="OUT-" x="15.24" y="-2.54" length="middle" direction="sup" rot="R180"/>
+<wire x1="-10.16" y1="-10.16" x2="-10.16" y2="5.08" width="0.254" layer="94"/>
+<wire x1="-10.16" y1="5.08" x2="10.16" y2="5.08" width="0.254" layer="94"/>
+<wire x1="10.16" y1="5.08" x2="10.16" y2="-10.16" width="0.254" layer="94"/>
+<wire x1="10.16" y1="-10.16" x2="-10.16" y2="-10.16" width="0.254" layer="94"/>
+</symbol>
+<symbol name="SSD1306-OLED-128X64-I2C-SYMBOL">
+<pin name="VCC" x="-7.62" y="-5.08" length="middle" direction="sup" rot="R90"/>
+<pin name="GND" x="-2.54" y="-5.08" length="middle" direction="sup" rot="R90"/>
+<pin name="SCL" x="2.54" y="-5.08" length="middle" direction="in" rot="R90"/>
+<pin name="SDA" x="7.62" y="-5.08" length="middle" rot="R90"/>
+<wire x1="-10.16" y1="0" x2="10.16" y2="0" width="0.254" layer="94"/>
+<wire x1="10.16" y1="0" x2="10.16" y2="20.32" width="0.254" layer="94"/>
+<wire x1="10.16" y1="20.32" x2="-10.16" y2="20.32" width="0.254" layer="94"/>
+<wire x1="-10.16" y1="20.32" x2="-10.16" y2="0" width="0.254" layer="94"/>
+<wire x1="-7.62" y1="10.16" x2="-7.62" y2="17.78" width="0.254" layer="94"/>
+<wire x1="-7.62" y1="17.78" x2="7.62" y2="17.78" width="0.254" layer="94"/>
+<wire x1="7.62" y1="17.78" x2="7.62" y2="10.16" width="0.254" layer="94"/>
+<wire x1="7.62" y1="10.16" x2="-7.62" y2="10.16" width="0.254" layer="94"/>
+<text x="0" y="13.97" size="1.27" layer="94" align="center">SSD1306
+OLED (I2C)</text>
+</symbol>
+<symbol name="POLOLU-S7V8F3-3V3-STEP-UP-DOWN-SYMBOL">
+<wire x1="-7.62" y1="5.08" x2="7.62" y2="5.08" width="0.254" layer="94"/>
+<wire x1="7.62" y1="5.08" x2="7.62" y2="-12.7" width="0.254" layer="94"/>
+<wire x1="7.62" y1="-12.7" x2="-7.62" y2="-12.7" width="0.254" layer="94"/>
+<wire x1="-7.62" y1="-12.7" x2="-7.62" y2="5.08" width="0.254" layer="94"/>
+<pin name="VIN" x="-12.7" y="2.54" length="middle" direction="sup"/>
+<pin name="VOUT" x="12.7" y="2.54" length="middle" direction="sup" rot="R180"/>
+<pin name="GND" x="0" y="-17.78" length="middle" direction="pwr" rot="R90"/>
+<pin name="/SHDN" x="-12.7" y="-2.54" length="middle" direction="in" function="dot"/>
+</symbol>
 <symbol name="WEMOS-D1-MINI">
 <description>WeMos.cc
 D1 mini
@@ -908,6 +958,98 @@ ESP8266 module</description>
 </symbol>
 </symbols>
 <devicesets>
+<deviceset name="TP4056-LIPO-CHG-PCB">
+<description>TP4056-based LiPo charger module</description>
+<gates>
+<gate name="G$1" symbol="TP4056-LIPO-CHG-PCB-SYMBOL" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="TP4056-PCB-HOLE">
+<connects>
+<connect gate="G$1" pin="B+" pad="B+"/>
+<connect gate="G$1" pin="B-" pad="B-"/>
+<connect gate="G$1" pin="IN+" pad="IN+"/>
+<connect gate="G$1" pin="IN-" pad="IN-"/>
+<connect gate="G$1" pin="OUT+" pad="OUT+"/>
+<connect gate="G$1" pin="OUT-" pad="OUT-"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+<device name="TP4056-PCB-SMD" package="TP4056-PCB-SMD">
+<connects>
+<connect gate="G$1" pin="B+" pad="B+"/>
+<connect gate="G$1" pin="B-" pad="B-"/>
+<connect gate="G$1" pin="IN+" pad="IN+"/>
+<connect gate="G$1" pin="IN-" pad="IN-"/>
+<connect gate="G$1" pin="OUT+" pad="OUT+"/>
+<connect gate="G$1" pin="OUT-" pad="OUT-"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="SSD1306-OLED-128X64-I2C">
+<gates>
+<gate name="G$1" symbol="SSD1306-OLED-128X64-I2C-SYMBOL" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="SSD1306-OLED-128X64-HOLE">
+<connects>
+<connect gate="G$1" pin="GND" pad="GND"/>
+<connect gate="G$1" pin="SCL" pad="SCL"/>
+<connect gate="G$1" pin="SDA" pad="SDA"/>
+<connect gate="G$1" pin="VCC" pad="VCC"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+<device name="SSD1306-OLED-128X64-SMD" package="SSD1306-OLED-128X64-SMD">
+<connects>
+<connect gate="G$1" pin="GND" pad="GND"/>
+<connect gate="G$1" pin="SCL" pad="SCL"/>
+<connect gate="G$1" pin="SDA" pad="SDA"/>
+<connect gate="G$1" pin="VCC" pad="VCC"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="POLOLU-S7V8F3-3V3-STEP-UP-DOWN">
+<gates>
+<gate name="G$1" symbol="POLOLU-S7V8F3-3V3-STEP-UP-DOWN-SYMBOL" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="POLOLU-S7V8F3-HOLE">
+<connects>
+<connect gate="G$1" pin="/SHDN" pad="SHDN"/>
+<connect gate="G$1" pin="GND" pad="GND"/>
+<connect gate="G$1" pin="VIN" pad="VIN"/>
+<connect gate="G$1" pin="VOUT" pad="VOUT"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+<device name="POLOLU-S7V8F3-PAD" package="POLOLU-S7V8F3-SMD">
+<connects>
+<connect gate="G$1" pin="/SHDN" pad="SHDN"/>
+<connect gate="G$1" pin="GND" pad="GND"/>
+<connect gate="G$1" pin="VIN" pad="VIN"/>
+<connect gate="G$1" pin="VOUT" pad="VOUT"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
 <deviceset name="WEMOS-D1-MINI" prefix="WEMOS" uservalue="yes">
 <description>WeMos.cc
 D1 mini
@@ -917,6 +1059,29 @@ ESP8266 module</description>
 </gates>
 <devices>
 <device name="" package="WEMOS-D1-MINI">
+<connects>
+<connect gate="D1" pin="3V3" pad="3V3"/>
+<connect gate="D1" pin="5V" pad="5V"/>
+<connect gate="D1" pin="A0" pad="A0"/>
+<connect gate="D1" pin="D0" pad="D0"/>
+<connect gate="D1" pin="D1" pad="D1"/>
+<connect gate="D1" pin="D2" pad="D2"/>
+<connect gate="D1" pin="D3" pad="D3"/>
+<connect gate="D1" pin="D4" pad="D4"/>
+<connect gate="D1" pin="D5" pad="D5"/>
+<connect gate="D1" pin="D6" pad="D6"/>
+<connect gate="D1" pin="D7" pad="D7"/>
+<connect gate="D1" pin="D8" pad="D8"/>
+<connect gate="D1" pin="GND" pad="GND"/>
+<connect gate="D1" pin="RESET" pad="RESET"/>
+<connect gate="D1" pin="RX" pad="RX"/>
+<connect gate="D1" pin="TX" pad="TX"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+<device name="WEMOS-D1-MINI-SMD" package="WEMOS-D1-MINI-SMD">
 <connects>
 <connect gate="D1" pin="3V3" pad="3V3"/>
 <connect gate="D1" pin="5V" pad="5V"/>
@@ -6888,8 +7053,8 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <part name="GND4" library="supply1" deviceset="GND" device=""/>
 <part name="LED1" library="WS2812B" deviceset="WS2812B" device=""/>
 <part name="IC1" library="adafruit" deviceset="DS3231" device="/SO"/>
-<part name="U$1" library="formatc1702-pcbs" deviceset="TP4056-LIPO-CHG-PCB" device=""/>
-<part name="UC1" library="esp8266modules" deviceset="WEMOS-D1-MINI" device="" value="Wemos D1 mini Pro"/>
+<part name="U$1" library="formatc1702-pcbs" deviceset="TP4056-LIPO-CHG-PCB" device="TP4056-PCB-SMD" value="TP4056-LIPO-CHG-PCBTP4056-PCB-SMD"/>
+<part name="UC1" library="formatc1702-pcbs" deviceset="WEMOS-D1-MINI" device="WEMOS-D1-MINI-SMD" value="Wemos D1 mini Pro"/>
 <part name="+3V1" library="supply1" deviceset="+3V3" device=""/>
 <part name="+3V2" library="supply1" deviceset="+3V3" device=""/>
 <part name="+3V3" library="supply1" deviceset="+3V3" device=""/>
@@ -6917,13 +7082,14 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <part name="R2" library="rcl" deviceset="R-EU_" device="R0805"/>
 <part name="GND16" library="supply1" deviceset="GND" device=""/>
 <part name="P+3" library="supply1" deviceset="VCC" device=""/>
-<part name="U$2" library="formatc1702-pcbs" deviceset="SSD1306-OLED-128X64-I2C" device=""/>
-<part name="U$3" library="formatc1702-pcbs" deviceset="POLOLU-S7V8F3-3V3-STEP-UP-DOWN" device=""/>
+<part name="U$2" library="formatc1702-pcbs" deviceset="SSD1306-OLED-128X64-I2C" device="SSD1306-OLED-128X64-SMD" value="SSD1306-OLED-128X64-I2CSSD1306-OLED-128X64-SMD"/>
+<part name="U$3" library="formatc1702-pcbs" deviceset="POLOLU-S7V8F3-3V3-STEP-UP-DOWN" device="POLOLU-S7V8F3-PAD" value="POLOLU-S7V8F3-3V3-STEP-UP-DOWNPOLOLU-S7V8F3-PAD"/>
 <part name="S1" library="formatc1702-switches" deviceset="SWITCH-MSK12D04-SLIDER-SMD" device="" value=""/>
 <part name="BUZ+" library="wirepad" deviceset="SMD2" device=""/>
 <part name="BUZ-" library="wirepad" deviceset="SMD2" device=""/>
-<part name="JP2" library="pinhead" deviceset="PINHD-1X2" device=""/>
 <part name="GND17" library="supply1" deviceset="GND" device=""/>
+<part name="TP-AUX" library="wirepad" deviceset="SMD2" device=""/>
+<part name="TP-AUX-GND" library="wirepad" deviceset="SMD2" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -6987,8 +7153,9 @@ Wemos +5V pin --&gt; V_IN pin (3.7V from LiPo)</text>
 <instance part="S1" gate="G$1" x="132.08" y="127" rot="R270"/>
 <instance part="BUZ+" gate="1" x="15.24" y="172.72" rot="R270"/>
 <instance part="BUZ-" gate="1" x="30.48" y="172.72" rot="R270"/>
-<instance part="JP2" gate="G$1" x="96.52" y="149.86" rot="MR0"/>
 <instance part="GND17" gate="1" x="106.68" y="139.7"/>
+<instance part="TP-AUX" gate="1" x="96.52" y="152.4"/>
+<instance part="TP-AUX-GND" gate="1" x="96.52" y="149.86"/>
 </instances>
 <busses>
 </busses>
@@ -7085,10 +7252,10 @@ Wemos +5V pin --&gt; V_IN pin (3.7V from LiPo)</text>
 <wire x1="154.94" y1="101.6" x2="154.94" y2="99.06" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="JP2" gate="G$1" pin="2"/>
 <wire x1="99.06" y1="149.86" x2="106.68" y2="149.86" width="0.1524" layer="91"/>
 <wire x1="106.68" y1="149.86" x2="106.68" y2="142.24" width="0.1524" layer="91"/>
 <pinref part="GND17" gate="1" pin="GND"/>
+<pinref part="TP-AUX-GND" gate="1" pin="P"/>
 </segment>
 </net>
 <net name="PB1" class="0">
@@ -7334,9 +7501,9 @@ Wemos +5V pin --&gt; V_IN pin (3.7V from LiPo)</text>
 </net>
 <net name="AUX" class="0">
 <segment>
-<pinref part="JP2" gate="G$1" pin="1"/>
 <wire x1="99.06" y1="152.4" x2="116.84" y2="152.4" width="0.1524" layer="91"/>
 <label x="114.3" y="152.4" size="1.778" layer="95"/>
+<pinref part="TP-AUX" gate="1" pin="P"/>
 </segment>
 <segment>
 <pinref part="UC1" gate="D1" pin="D1"/>
@@ -7356,6 +7523,8 @@ Wemos +5V pin --&gt; V_IN pin (3.7V from LiPo)</text>
 <approved hash="102,1,114.3,111.76,OUT-,GND,,,,"/>
 <approved hash="102,1,40.64,210.82,VCC,+3V3,,,,"/>
 <approved hash="102,1,142.24,121.92,VIN,N$8,,,,"/>
+<approved hash="102,1,167.64,121.92,VOUT,+3V3,,,,"/>
+<approved hash="201,1,40.64,210.82,VCC,VCC\, +3V3,,,,"/>
 <approved hash="104,1,154.94,190.5,LED1,VDD,+3V3,,,"/>
 <approved hash="104,1,114.3,76.2,IC1,VCC,+3V3,,,"/>
 <approved hash="113,1,91.971,132.611,FRAME1,,,,,"/>
