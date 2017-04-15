@@ -12,9 +12,11 @@ btn_center = button_debounce(4)
 btn_right  = button_debounce(5)
 
 DISP_W = const(128)
-DISP_H = const( 32)
+DISP_H = const( 64)
 i2c  = I2C(scl=Pin(14), sda=Pin(16), freq=100000)
 oled = ssd1306.SSD1306_I2C  (DISP_W, DISP_H, i2c)
+oled.write_cmd(0xa0 | 0x00) # flip X
+oled.write_cmd(0xc0 | 0x00) # flip Y
 bf   = bitmapfont.BitmapFont(DISP_W, DISP_H, oled.pixel, oled.framebuf.fill_rect)
 bf.init()
 bmp = bitmaps.MyGFX(oled.pixel)
@@ -276,9 +278,6 @@ def s_review():
 def s_exit():
     return(s_exit, None)
 
-import micropython
-micropython.mem_info(1)
-
 m = StateMachine()
 m.add_state("s_start",      s_start    )
 m.add_state("s_select",     s_select   )
@@ -297,8 +296,8 @@ m.add_state("s_completed",  s_completed)
 m.add_state("s_review",     s_review   )
 m.add_state("s_exit", None, end_state=1)
 m.set_start("s_start")
-
-import micropython
-micropython.mem_info(1)
+ 
+# import micropython
+# micropython.mem_info(1)
 
 m.run()
