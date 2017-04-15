@@ -40,7 +40,7 @@ class BitmapFont:
     def __exit__(self, exception_type, exception_value, traceback):
         self.deinit()
 
-    def draw_char(self, ch, x, y, size=1, *args, **kwargs):
+    def draw_char(self, ch, x, y, size, *args, **kwargs):
         # Don't draw the character if it will be clipped off the visible area.
         if x < -self._font_width or x >= self._width or \
            y < -self._font_height or y >= self._height:
@@ -60,15 +60,15 @@ class BitmapFont:
                 for char_y in range(self._font_height):
                     # Draw a pixel for each bit that's flipped on.
                     if (line >> char_y) & 0x1:
-                        self._fill_rect((x + char_x) * size, (y + char_y) * size, size, size, *args, **kwargs)
+                        self._fill_rect(x + (char_x * size), y + (char_y * size), size, size, *args, **kwargs)
                         # for rr in range(0,size):
-                        #     for cc in range(0,size):
-                        #         self._pixel((x + char_x) * size + cc, (y + char_y) * size + rr, *args, **kwargs)
+                            # for cc in range(0,size):
+                                # self._pixel(x + (char_x) * size + cc,y +  (char_y) * size + rr, *args, **kwargs)
 
-    def text(self, text, x, y, *args, **kwargs):
+    def text(self, text, x, y, size=1, *args, **kwargs):
         # Draw the specified text at the specified location.
         for i in range(len(text)):
-            self.draw_char(text[i], x + (i * (self._font_width + 1)), y,
+            self.draw_char(text[i], x + (i * (self._font_width + 1) * size), y, size,
                            *args, **kwargs)
 
     def width(self, text):
