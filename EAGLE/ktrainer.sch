@@ -888,6 +888,10 @@ SWITCH</text>
 <smd name="GND" x="-1.27" y="12.7" dx="2.032" dy="2.032" layer="1" roundness="100"/>
 <smd name="SCL" x="1.27" y="12.7" dx="2.032" dy="2.032" layer="1" roundness="100"/>
 <smd name="SDA" x="3.81" y="12.7" dx="2.032" dy="2.032" layer="1" roundness="100"/>
+<circle x="-12.065" y="-10.795" radius="1.016" width="0.127" layer="21"/>
+<circle x="12.065" y="-10.795" radius="1.016" width="0.127" layer="21"/>
+<circle x="12.065" y="12.7" radius="1.016" width="0.127" layer="21"/>
+<circle x="-12.065" y="12.7" radius="1.016" width="0.127" layer="21"/>
 </package>
 </packages>
 <symbols>
@@ -7090,6 +7094,8 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <part name="GND17" library="supply1" deviceset="GND" device=""/>
 <part name="TP-AUX" library="wirepad" deviceset="SMD2" device=""/>
 <part name="TP-AUX-GND" library="wirepad" deviceset="SMD2" device=""/>
+<part name="BUZ+1" library="wirepad" deviceset="SMD2" device=""/>
+<part name="BUZ-1" library="wirepad" deviceset="SMD2" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -7137,7 +7143,7 @@ Wemos +5V pin --&gt; V_IN pin (3.7V from LiPo)</text>
 <instance part="P+4" gate="VCC" x="119.38" y="132.08"/>
 <instance part="+3V5" gate="G$1" x="175.26" y="129.54"/>
 <instance part="P+2" gate="VCC" x="165.1" y="88.9"/>
-<instance part="C1" gate="G$1" x="106.68" y="63.5"/>
+<instance part="C1" gate="G$1" x="106.68" y="71.12"/>
 <instance part="GND12" gate="1" x="106.68" y="55.88"/>
 <instance part="C2" gate="G$1" x="157.48" y="63.5"/>
 <instance part="GND13" gate="1" x="157.48" y="55.88"/>
@@ -7156,6 +7162,8 @@ Wemos +5V pin --&gt; V_IN pin (3.7V from LiPo)</text>
 <instance part="GND17" gate="1" x="106.68" y="139.7"/>
 <instance part="TP-AUX" gate="1" x="96.52" y="152.4"/>
 <instance part="TP-AUX-GND" gate="1" x="96.52" y="149.86"/>
+<instance part="BUZ+1" gate="1" x="10.16" y="172.72" rot="R270"/>
+<instance part="BUZ-1" gate="1" x="38.1" y="172.72" rot="R270"/>
 </instances>
 <busses>
 </busses>
@@ -7206,8 +7214,24 @@ Wemos +5V pin --&gt; V_IN pin (3.7V from LiPo)</text>
 <segment>
 <pinref part="IC1" gate="G$1" pin="GND"/>
 <pinref part="GND8" gate="1" pin="GND"/>
-<wire x1="147.32" y1="58.42" x2="147.32" y2="71.12" width="0.1524" layer="91"/>
+<wire x1="147.32" y1="58.42" x2="147.32" y2="60.96" width="0.1524" layer="91"/>
+<wire x1="147.32" y1="60.96" x2="147.32" y2="63.5" width="0.1524" layer="91"/>
+<wire x1="147.32" y1="63.5" x2="147.32" y2="66.04" width="0.1524" layer="91"/>
+<wire x1="147.32" y1="66.04" x2="147.32" y2="68.58" width="0.1524" layer="91"/>
+<wire x1="147.32" y1="68.58" x2="147.32" y2="71.12" width="0.1524" layer="91"/>
 <wire x1="147.32" y1="71.12" x2="144.78" y2="71.12" width="0.1524" layer="91"/>
+<pinref part="IC1" gate="G$1" pin="NC7"/>
+<wire x1="144.78" y1="68.58" x2="147.32" y2="68.58" width="0.1524" layer="91"/>
+<pinref part="IC1" gate="G$1" pin="NC6"/>
+<wire x1="144.78" y1="66.04" x2="147.32" y2="66.04" width="0.1524" layer="91"/>
+<pinref part="IC1" gate="G$1" pin="NC5"/>
+<wire x1="144.78" y1="63.5" x2="147.32" y2="63.5" width="0.1524" layer="91"/>
+<pinref part="IC1" gate="G$1" pin="NC4"/>
+<wire x1="144.78" y1="60.96" x2="147.32" y2="60.96" width="0.1524" layer="91"/>
+<junction x="147.32" y="68.58"/>
+<junction x="147.32" y="66.04"/>
+<junction x="147.32" y="63.5"/>
+<junction x="147.32" y="60.96"/>
 </segment>
 <segment>
 <pinref part="U$1" gate="G$1" pin="OUT-"/>
@@ -7222,6 +7246,24 @@ Wemos +5V pin --&gt; V_IN pin (3.7V from LiPo)</text>
 <segment>
 <pinref part="C1" gate="G$1" pin="2"/>
 <pinref part="GND12" gate="1" pin="GND"/>
+<wire x1="106.68" y1="66.04" x2="106.68" y2="60.96" width="0.1524" layer="91"/>
+<pinref part="IC1" gate="G$1" pin="NC"/>
+<wire x1="106.68" y1="60.96" x2="106.68" y2="58.42" width="0.1524" layer="91"/>
+<wire x1="114.3" y1="68.58" x2="111.76" y2="68.58" width="0.1524" layer="91"/>
+<wire x1="111.76" y1="68.58" x2="111.76" y2="66.04" width="0.1524" layer="91"/>
+<pinref part="IC1" gate="G$1" pin="NC3"/>
+<wire x1="111.76" y1="63.5" x2="111.76" y2="60.96" width="0.1524" layer="91"/>
+<wire x1="111.76" y1="60.96" x2="114.3" y2="60.96" width="0.1524" layer="91"/>
+<pinref part="IC1" gate="G$1" pin="NC2"/>
+<wire x1="114.3" y1="63.5" x2="111.76" y2="63.5" width="0.1524" layer="91"/>
+<pinref part="IC1" gate="G$1" pin="NC1"/>
+<wire x1="114.3" y1="66.04" x2="111.76" y2="66.04" width="0.1524" layer="91"/>
+<wire x1="111.76" y1="66.04" x2="111.76" y2="63.5" width="0.1524" layer="91"/>
+<wire x1="111.76" y1="60.96" x2="106.68" y2="60.96" width="0.1524" layer="91"/>
+<junction x="106.68" y="60.96"/>
+<junction x="111.76" y="60.96"/>
+<junction x="111.76" y="63.5"/>
+<junction x="111.76" y="66.04"/>
 </segment>
 <segment>
 <pinref part="C2" gate="G$1" pin="2"/>
@@ -7235,7 +7277,12 @@ Wemos +5V pin --&gt; V_IN pin (3.7V from LiPo)</text>
 <segment>
 <pinref part="GND15" gate="1" pin="GND"/>
 <pinref part="BUZ-" gate="1" pin="P"/>
-<wire x1="30.48" y1="170.18" x2="30.48" y2="160.02" width="0.1524" layer="91"/>
+<wire x1="30.48" y1="170.18" x2="30.48" y2="165.1" width="0.1524" layer="91"/>
+<pinref part="BUZ-1" gate="1" pin="P"/>
+<wire x1="30.48" y1="165.1" x2="30.48" y2="160.02" width="0.1524" layer="91"/>
+<wire x1="38.1" y1="170.18" x2="38.1" y2="165.1" width="0.1524" layer="91"/>
+<wire x1="38.1" y1="165.1" x2="30.48" y2="165.1" width="0.1524" layer="91"/>
+<junction x="30.48" y="165.1"/>
 </segment>
 <segment>
 <pinref part="R2" gate="G$1" pin="1"/>
@@ -7268,9 +7315,9 @@ Wemos +5V pin --&gt; V_IN pin (3.7V from LiPo)</text>
 <label x="53.34" y="172.72" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="UC1" gate="D1" pin="D7"/>
-<wire x1="25.4" y1="71.12" x2="10.16" y2="71.12" width="0.1524" layer="91"/>
-<label x="12.7" y="71.12" size="1.778" layer="95"/>
+<pinref part="UC1" gate="D1" pin="D0"/>
+<wire x1="25.4" y1="78.74" x2="10.16" y2="78.74" width="0.1524" layer="91"/>
+<label x="12.7" y="78.74" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="PB2" class="0">
@@ -7283,9 +7330,9 @@ Wemos +5V pin --&gt; V_IN pin (3.7V from LiPo)</text>
 <label x="71.12" y="172.72" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="UC1" gate="D1" pin="D8"/>
-<wire x1="25.4" y1="68.58" x2="10.16" y2="68.58" width="0.1524" layer="91"/>
-<label x="12.7" y="68.58" size="1.778" layer="95"/>
+<pinref part="UC1" gate="D1" pin="D7"/>
+<wire x1="25.4" y1="71.12" x2="10.16" y2="71.12" width="0.1524" layer="91"/>
+<label x="12.7" y="71.12" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="PB3" class="0">
@@ -7366,7 +7413,7 @@ Wemos +5V pin --&gt; V_IN pin (3.7V from LiPo)</text>
 <wire x1="106.68" y1="81.28" x2="106.68" y2="76.2" width="0.1524" layer="91"/>
 <wire x1="106.68" y1="76.2" x2="114.3" y2="76.2" width="0.1524" layer="91"/>
 <pinref part="C1" gate="G$1" pin="1"/>
-<wire x1="106.68" y1="76.2" x2="106.68" y2="66.04" width="0.1524" layer="91"/>
+<wire x1="106.68" y1="76.2" x2="106.68" y2="73.66" width="0.1524" layer="91"/>
 <junction x="106.68" y="76.2"/>
 </segment>
 <segment>
@@ -7439,7 +7486,7 @@ Wemos +5V pin --&gt; V_IN pin (3.7V from LiPo)</text>
 <label x="66.04" y="71.12" size="1.778" layer="95"/>
 </segment>
 </net>
-<net name="N$6" class="0">
+<net name="B-" class="0">
 <segment>
 <pinref part="JP1" gate="G$1" pin="2"/>
 <wire x1="100.33" y1="91.44" x2="100.33" y2="96.52" width="0.1524" layer="91"/>
@@ -7491,12 +7538,17 @@ Wemos +5V pin --&gt; V_IN pin (3.7V from LiPo)</text>
 <label x="7.62" y="162.56" size="1.778" layer="95"/>
 <pinref part="BUZ+" gate="1" pin="P"/>
 <wire x1="15.24" y1="162.56" x2="5.08" y2="162.56" width="0.1524" layer="91"/>
-<wire x1="15.24" y1="170.18" x2="15.24" y2="162.56" width="0.1524" layer="91"/>
+<wire x1="15.24" y1="170.18" x2="15.24" y2="165.1" width="0.1524" layer="91"/>
+<pinref part="BUZ+1" gate="1" pin="P"/>
+<wire x1="15.24" y1="165.1" x2="15.24" y2="162.56" width="0.1524" layer="91"/>
+<wire x1="10.16" y1="170.18" x2="10.16" y2="165.1" width="0.1524" layer="91"/>
+<wire x1="10.16" y1="165.1" x2="15.24" y2="165.1" width="0.1524" layer="91"/>
+<junction x="15.24" y="165.1"/>
 </segment>
 <segment>
-<pinref part="UC1" gate="D1" pin="D0"/>
-<wire x1="25.4" y1="78.74" x2="10.16" y2="78.74" width="0.1524" layer="91"/>
-<label x="12.7" y="78.74" size="1.778" layer="95"/>
+<pinref part="UC1" gate="D1" pin="D8"/>
+<wire x1="25.4" y1="68.58" x2="10.16" y2="68.58" width="0.1524" layer="91"/>
+<label x="12.7" y="68.58" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="AUX" class="0">
@@ -7519,7 +7571,6 @@ Wemos +5V pin --&gt; V_IN pin (3.7V from LiPo)</text>
 <approved hash="102,1,83.82,111.76,IN-,GND,,,,"/>
 <approved hash="102,1,114.3,116.84,OUT+,VCC,,,,"/>
 <approved hash="102,1,96.52,99.06,B+,VCC,,,,"/>
-<approved hash="102,1,101.6,99.06,B-,N$6,,,,"/>
 <approved hash="102,1,114.3,111.76,OUT-,GND,,,,"/>
 <approved hash="102,1,40.64,210.82,VCC,+3V3,,,,"/>
 <approved hash="102,1,142.24,121.92,VIN,N$8,,,,"/>
@@ -7527,12 +7578,25 @@ Wemos +5V pin --&gt; V_IN pin (3.7V from LiPo)</text>
 <approved hash="201,1,40.64,210.82,VCC,VCC\, +3V3,,,,"/>
 <approved hash="104,1,154.94,190.5,LED1,VDD,+3V3,,,"/>
 <approved hash="104,1,114.3,76.2,IC1,VCC,+3V3,,,"/>
+<approved hash="103,1,114.3,68.58,IC1,NC,GND,,,"/>
+<approved hash="103,1,114.3,66.04,IC1,NC1,GND,,,"/>
+<approved hash="103,1,114.3,63.5,IC1,NC2,GND,,,"/>
+<approved hash="103,1,114.3,60.96,IC1,NC3,GND,,,"/>
+<approved hash="103,1,144.78,60.96,IC1,NC4,GND,,,"/>
+<approved hash="103,1,144.78,63.5,IC1,NC5,GND,,,"/>
+<approved hash="103,1,144.78,66.04,IC1,NC6,GND,,,"/>
+<approved hash="103,1,144.78,68.58,IC1,NC7,GND,,,"/>
 <approved hash="113,1,91.971,132.611,FRAME1,,,,,"/>
 <approved hash="113,1,97.6588,91.2029,JP1,,,,,"/>
 <approved hash="113,1,164.159,73.66,SJ1,,,,,"/>
+<approved hash="113,1,57.4252,116.84,R1,,,,,"/>
+<approved hash="113,1,57.4252,106.68,R2,,,,,"/>
 <approved hash="113,1,16.4126,170.459,BUZ+,,,,,"/>
 <approved hash="113,1,31.6526,170.459,BUZ-,,,,,"/>
-<approved hash="113,1,98.8229,152.531,JP2,,,,,"/>
+<approved hash="113,1,99.7402,153.573,TP-AUX,,,,,"/>
+<approved hash="113,1,102.989,151.033,TP-AUX-GND,,,,,"/>
+<approved hash="113,1,11.3326,170.169,BUZ+1,,,,,"/>
+<approved hash="113,1,39.2726,170.459,BUZ-1,,,,,"/>
 </errors>
 </schematic>
 </drawing>
