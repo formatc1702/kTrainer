@@ -7,13 +7,19 @@ from statemachine import StateMachine
 import bitmaps
 import utime as time
 
-btn_left   = button_debounce(0)
-btn_center = button_debounce(4)
-btn_right  = button_debounce(5)
+# btn_1 = button_debounce(16)
+# btn_2 = button_debounce(13)
+# btn_3 = button_debounce( 0)
+# # btn_4 = button_debounce( 4)
+
+# because Pin(16) doesn't support pull:
+btn_1 = button_debounce(13)
+btn_2 = button_debounce(0)
+btn_3 = button_debounce( 4)
 
 DISP_W = const(128)
 DISP_H = const( 64)
-i2c  = I2C(scl=Pin(14), sda=Pin(16), freq=100000)
+i2c  = I2C(scl=Pin(12), sda=Pin(14), freq=100000)
 oled = ssd1306.SSD1306_I2C  (DISP_W, DISP_H, i2c)
 oled.write_cmd(0xa0 | 0x00) # flip X
 oled.write_cmd(0xc0 | 0x00) # flip Y
@@ -36,12 +42,12 @@ def s_start():
     bmp.button_icons3(bitmaps.X, bitmaps.PLAY, bitmaps.REPORT)
     oled.show()
     while True:
-        if btn_left.transition() == 1:
+        if btn_1.transition() == 1:
             return("s_exit")
-        if btn_center.transition() == 1:
+        if btn_2.transition() == 1:
             training.reset()
             return("s_select")
-        if btn_right.transition() == 1:
+        if btn_3.transition() == 1:
             return("s_review")
 
 def s_select():
@@ -76,13 +82,13 @@ def s_before():
     oled.show()
 
     while True:
-        if btn_left.transition() == 1:
+        if btn_1.transition() == 1:
             return("s_abort")
-        if btn_center.transition() == 1:
+        if btn_2.transition() == 1:
             global countdown
             countdown = 5
             return("s_countdown")
-        if btn_right.transition() == 1:
+        if btn_3.transition() == 1:
             training.next()
             return("s_select")
 
@@ -100,10 +106,10 @@ def s_countdown():
                 return("s_countdown")
             else:
                 return("s_go_up")
-        if btn_left.transition() == 1:
+        if btn_1.transition() == 1:
             training.current_exercise.reset()
             return("s_select")
-        if btn_right.transition() == 1:
+        if btn_3.transition() == 1:
             training.current_exercise.skip()
             if training.is_complete:
                 return("s_completed")
@@ -117,13 +123,13 @@ def s_paused():
     bmp.button_icons3(bitmaps.X, bitmaps.PLAY, bitmaps.BLANK)
     oled.show()
     while True:
-        if btn_left.transition() == 1:
+        if btn_1.transition() == 1:
             return("s_discard")
-        if btn_center.transition() == 1:
+        if btn_2.transition() == 1:
             global countdown
             countdown = 5
             return("s_countdown")
-        if btn_right.transition() == 1:
+        if btn_3.transition() == 1:
             pass
 
 def s_go_up():
@@ -133,7 +139,7 @@ def s_go_up():
     bmp.button_icons3(bitmaps.BLANK, bitmaps.PAUSE, bitmaps.BLANK)
     oled.show()
     while True:
-        if btn_center.transition() == 1:
+        if btn_2.transition() == 1:
             return("s_paused")
         if time.ticks_ms() - now > 4000 / speed_factor:
             return("s_stay_up")
@@ -145,7 +151,7 @@ def s_stay_up():
     bmp.button_icons3(bitmaps.BLANK, bitmaps.PAUSE, bitmaps.BLANK)
     oled.show()
     while True:
-        if btn_center.transition() == 1:
+        if btn_2.transition() == 1:
             return("s_paused")
         if time.ticks_ms() - now > 2000 / speed_factor:
             return("s_go_down")
@@ -157,7 +163,7 @@ def s_go_down():
     bmp.button_icons3(bitmaps.BLANK, bitmaps.PAUSE, bitmaps.BLANK)
     oled.show()
     while True:
-        if btn_center.transition() == 1:
+        if btn_2.transition() == 1:
             return("s_paused")
         if time.ticks_ms() - now > 4000 / speed_factor:
             return("s_stay_down")
@@ -169,7 +175,7 @@ def s_stay_down():
     bmp.button_icons3(bitmaps.BLANK, bitmaps.PAUSE, bitmaps.BLANK)
     oled.show()
     while True:
-        if btn_center.transition() == 1:
+        if btn_2.transition() == 1:
             return("s_paused")
         if time.ticks_ms() - now > 2000 / speed_factor:
             training.current_exercise.reps += 1
@@ -185,15 +191,15 @@ def s_after():
     bmp.button_icons3(bitmaps.X, bitmaps.PLAY, bitmaps.ADJUST)
     oled.show()
     while True:
-        if btn_left.transition() == 1:
+        if btn_1.transition() == 1:
             return("s_discard")
-        if btn_center.transition() == 1:
+        if btn_2.transition() == 1:
             if training.is_complete:
                 return("s_completed")
             else:
                 training.next_pending()
                 return("s_select")
-        if btn_right.transition() == 1:
+        if btn_3.transition() == 1:
             return("s_adjust")
 
 def s_adjust():
@@ -203,12 +209,12 @@ def s_adjust():
     bmp.button_icons3(bitmaps.MINUS, bitmaps.CHECK, bitmaps.PLUS)
     oled.show()
     while True:
-        if btn_left.transition() == 1:
+        if btn_1.transition() == 1:
             training.current_exercise.weight -= 2
             return("s_adjust")
-        if btn_center.transition() == 1:
+        if btn_2.transition() == 1:
             return("s_after")
-        if btn_right.transition() == 1:
+        if btn_3.transition() == 1:
             training.current_exercise.weight += 2
             return("s_adjust")
 
@@ -218,9 +224,9 @@ def s_abort():
     bmp.button_icons3(bitmaps.X, bitmaps.BLANK, bitmaps.CHECK)
     oled.show()
     while True:
-        if btn_left.transition() == 1:
+        if btn_1.transition() == 1:
             return("s_select")
-        if btn_right.transition() == 1:
+        if btn_3.transition() == 1:
             while not training.is_complete:
                 training.current_exercise.skip()
                 training.next_pending()
@@ -232,15 +238,15 @@ def s_discard():
     bmp.button_icons3(bitmaps.X, bitmaps.RESTART, bitmaps.SKIP)
     oled.show()
     while True:
-        if btn_left.transition() == 1:
+        if btn_1.transition() == 1:
             if training.current_exercise.ongoing:
                 return("s_paused")
             else:
                 return("s_after")
-        if btn_center.transition() == 1:
+        if btn_2.transition() == 1:
             training.current_exercise.reset()
             return("s_select")
-        if btn_right.transition() == 1:
+        if btn_3.transition() == 1:
             training.current_exercise.skip()
             if training.is_complete:
                 return("s_completed")
@@ -255,10 +261,10 @@ def s_completed():
     oled.text("discard/save/x",0,24)
     oled.show()
     while True:
-        if btn_left.transition() == 1:
+        if btn_1.transition() == 1:
             print("Training was discarded")
             return("s_start")
-        if btn_center.transition() == 1:
+        if btn_2.transition() == 1:
             print("Training was saved")
             #training.save_training("savedplan.txt")
             return("s_start")
@@ -272,7 +278,7 @@ def s_review():
     bmp.button_icons3(bitmaps.BLANK, bitmaps.CHECK, bitmaps.BLANK)
     oled.show()
     while True:
-        if btn_center.transition() == 1:
+        if btn_2.transition() == 1:
             return("s_start")
 
 def s_exit():
@@ -296,7 +302,7 @@ m.add_state("s_completed",  s_completed)
 m.add_state("s_review",     s_review   )
 m.add_state("s_exit", None, end_state=1)
 m.set_start("s_start")
- 
+
 # import micropython
 # micropython.mem_info(1)
 
