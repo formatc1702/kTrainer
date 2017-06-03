@@ -8,15 +8,19 @@ from statemachine import StateMachine
 import bitmaps
 import utime as time
 
+# HARDWARE INITIALIZATION
+# Buttons
 btn_1 = button_debounce( 5) # spare IO because Pin(16) doesn't support pull
 btn_2 = button_debounce(13)
 btn_3 = button_debounce( 0)
 btn_4 = button_debounce( 4)
-
+# Buzzer
+buz   = Pin(15, Pin.IN) # disable buzzer (for now)
+# RGB LED
 l = led.LED(Pin(2))
 t_short = 0.05
 t_long  = 0.33
-
+# OLED
 DISP_W = const(128)
 DISP_H = const( 64)
 i2c  = I2C(scl=Pin(12), sda=Pin(14), freq=100000)
@@ -27,6 +31,7 @@ bf   = bitmapfont.BitmapFont(DISP_W, DISP_H, oled.pixel, oled.framebuf.fill_rect
 bf.init()
 bmp = bitmaps.MyGFX(oled.pixel)
 
+# DATA INITIALIZATION
 training = kTraining()
 training.load_training("myplan.txt")
 
