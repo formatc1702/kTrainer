@@ -4,6 +4,8 @@ B6
     Sitz 19
     Lehne 1
     Position 6
+H7
+    Sitz 4
 F1
     Loch 3
 F2.1
@@ -15,7 +17,7 @@ F3
     Start 3
     Bew 15
 C1
-    Sitz 6
+    Sitz 7
     Lehne vorne
     Arme 1
 C7
