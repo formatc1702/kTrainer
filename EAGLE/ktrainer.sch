@@ -7112,6 +7112,13 @@ Attach:
 Wemos VBUS --&gt; 5V_USB pin (next to Wemos +5V)
 
 Wemos +5V pin --&gt; V_IN pin (3.7V from LiPo)</text>
+<wire x1="20.32" y1="78.74" x2="20.32" y2="93.98" width="0.1524" layer="97"/>
+<wire x1="20.32" y1="93.98" x2="60.96" y2="93.98" width="0.1524" layer="97"/>
+<wire x1="60.96" y1="93.98" x2="60.96" y2="78.74" width="0.1524" layer="97"/>
+<text x="17.78" y="86.36" size="1.778" layer="91" rot="R90">Add jumper wire from D1 to D0
+
+(D0 does not have internal pull-up + IRQ,
+necessary for pushbutton operation)</text>
 </plain>
 <instances>
 <instance part="FRAME1" gate="G$1" x="0" y="0"/>
@@ -7316,8 +7323,10 @@ Wemos +5V pin --&gt; V_IN pin (3.7V from LiPo)</text>
 </segment>
 <segment>
 <pinref part="UC1" gate="D1" pin="D0"/>
-<wire x1="25.4" y1="78.74" x2="10.16" y2="78.74" width="0.1524" layer="91"/>
+<wire x1="25.4" y1="78.74" x2="20.32" y2="78.74" width="0.1524" layer="91"/>
 <label x="12.7" y="78.74" size="1.778" layer="95"/>
+<junction x="20.32" y="78.74"/>
+<wire x1="20.32" y1="78.74" x2="10.16" y2="78.74" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="PB2" class="0">
@@ -7559,8 +7568,10 @@ Wemos +5V pin --&gt; V_IN pin (3.7V from LiPo)</text>
 </segment>
 <segment>
 <pinref part="UC1" gate="D1" pin="D1"/>
-<wire x1="58.42" y1="78.74" x2="68.58" y2="78.74" width="0.1524" layer="91"/>
+<wire x1="58.42" y1="78.74" x2="60.96" y2="78.74" width="0.1524" layer="91"/>
 <label x="66.04" y="78.74" size="1.778" layer="95"/>
+<junction x="60.96" y="78.74"/>
+<wire x1="60.96" y1="78.74" x2="68.58" y2="78.74" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>

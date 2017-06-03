@@ -13,11 +13,6 @@ btn_2 = button_debounce(13)
 btn_3 = button_debounce( 0)
 btn_4 = button_debounce( 4)
 
-# # because Pin(16) doesn't support pull:
-# btn_1 = button_debounce(13)
-# btn_2 = button_debounce(0)
-# btn_3 = button_debounce( 4)
-
 l = led.LED(Pin(2))
 t_short = 0.05
 t_long  = 0.33
