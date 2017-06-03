@@ -33,12 +33,12 @@ class MyGFX:
         self.f.seek(pos * 8)
         return self.f.read(8)
 
-    def button_icons3(self, icon1, icon2, icon3, row=24):
+    def button_icons3(self, icon1, icon2, icon3, row=56):
         self.draw_bitmap(icon1,  0,row)
         self.draw_bitmap(icon2, 60,row)
         self.draw_bitmap(icon3,120,row)
 
-    def button_icons4(self, icon1, icon2, icon3, icon4, row=24):
+    def button_icons4(self, icon1, icon2, icon3, icon4, row=56):
         self.draw_bitmap(icon1,  0,row)
         self.draw_bitmap(icon2, 40,row)
         self.draw_bitmap(icon3, 80,row)
