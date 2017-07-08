@@ -8,7 +8,17 @@ H7
     Sitz 4
 F1
     Loch 3
-F2.1
+F11L
+    Loch 5
+    Fuss F3
+    Start 3
+    Kurbel 3
+F11R
+    Loch 5
+    Fuss F3
+    Start 3
+    Kurbel 3
+F21
     Loch 4
     Fuss 7
 F3
@@ -16,6 +26,10 @@ F3
     Knie 8
     Start 3
     Bew 15
+F31
+    Loch 9
+    Beine H9
+    Start 12
 C1
     Sitz 7
     Lehne vorne
@@ -34,3 +48,5 @@ G5
     Sitz 5
     Polster 18
     Kopf 4
+H7
+    Sitz 4
