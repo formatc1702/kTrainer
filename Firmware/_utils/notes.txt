@@ -1,0 +1,9 @@
+How to flash MicroPython firmware with esptool:
+
+esptool.py --port /dev/tty.SLAB_USBtoUART erase_flash
+
+esptool.py --port /dev/tty.SLAB_USBtoUART --baud 460800 write_flash --flash_size=4MB -fm dio 0 micropython-esp8266-20161017-v1.8.5.bin
+                                                                                 ^^^ ^^^^^^^
+                                                                                 |   |
+                                                                                 |   seems necessary
+                                                                                 should be 16MB but hasn't worked so well
