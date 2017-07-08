@@ -144,7 +144,7 @@ def s_paused():
 
 def s_go_up():
     oled.fill(0)
-    oled.text("^ {}".format(training.current_exercise.reps),0,0)
+    oled.text("^ {}".format(training.current_exercise.reps+1),0,0)
     bmp.button_icons4(bitmaps.BLANK, bitmaps.BLANK, bitmaps.PAUSE, bitmaps.BLANK)
     oled.show()
     starttime = time.ticks_ms()
@@ -159,7 +159,7 @@ def s_go_up():
 
 def s_stay_up():
     oled.fill(0)
-    oled.text("- {}".format(training.current_exercise.reps),0,0)
+    oled.text("- {}".format(training.current_exercise.reps+1),0,0)
     bmp.button_icons4(bitmaps.BLANK, bitmaps.BLANK, bitmaps.PAUSE, bitmaps.BLANK)
     oled.show()
     starttime = time.ticks_ms()
@@ -174,7 +174,7 @@ def s_stay_up():
 
 def s_go_down():
     oled.fill(0)
-    oled.text("v {}".format(training.current_exercise.reps),0,0)
+    oled.text("v {}".format(training.current_exercise.reps+1),0,0)
     bmp.button_icons4(bitmaps.BLANK, bitmaps.BLANK, bitmaps.PAUSE, bitmaps.BLANK)
     oled.show()
     starttime = time.ticks_ms()
@@ -189,7 +189,7 @@ def s_go_down():
 
 def s_stay_down():
     oled.fill(0)
-    oled.text("_ {}".format(training.current_exercise.reps),0,0)
+    oled.text("_ {}".format(training.current_exercise.reps+1),0,0)
     bmp.button_icons4(bitmaps.BLANK, bitmaps.BLANK, bitmaps.PAUSE, bitmaps.BLANK)
     oled.show()
     starttime = time.ticks_ms()
