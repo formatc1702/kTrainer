@@ -40,6 +40,16 @@ countdown = 0 # global!
 speed_factor  =    1
 speed_factor2 =    1
 
+def draw_ex_name():
+    oled.framebuf.fill_rect(0,0,26,18,1)
+    n = training.current_exercise.name
+    if len(n) <= 2:
+        bf.text(n,1,1,2,0)
+    else:
+        bf.text(n[0],   1, 1,2,0)
+        bf.text(n[1],  14, 2,1,0)
+        bf.text(n[2:4],14,10,1,0)
+
 
 def s_start():
     l.set(led.black)
@@ -62,14 +72,7 @@ def s_select():
 def s_before():
     l.set(led.black)
     oled.fill(0)
-    oled.framebuf.fill_rect(0,0,26,18,1)
-    n = training.current_exercise.name
-    if len(n) <= 2:
-        bf.text(n,1,1,2,0)
-    else:
-        bf.text(n[0],   1, 1,2,0)
-        bf.text(n[1],  14, 2,1,0)
-        bf.text(n[2:4],14,10,1,0)
+    draw_ex_name()
 
     bmp.draw_bitmap(bitmaps.WEIGHT,28,0)
     oled.text("{:>3}".format(training.current_exercise.weight), 40,0)
@@ -107,7 +110,8 @@ def s_countdown():
     now = time.ticks_ms()
     l.set(led.black)
     oled.fill(0)
-    oled.text("{}".format(countdown),0,0)
+    draw_ex_name()
+    bf.text("-{}".format(countdown),46,20,3,1)
     bmp.button_icons4(bitmaps.X, bitmaps.BLANK, bitmaps.BLANK, bitmaps.SKIP)
     oled.show()
     while True:
@@ -144,7 +148,8 @@ def s_paused():
 
 def s_go_up():
     oled.fill(0)
-    oled.text("^ {}".format(training.current_exercise.reps+1),0,0)
+    draw_ex_name()
+    bf.text("^ {}".format(training.current_exercise.reps+1),37,20,3,1)
     bmp.button_icons4(bitmaps.BLANK, bitmaps.BLANK, bitmaps.PAUSE, bitmaps.BLANK)
     oled.show()
     starttime = time.ticks_ms()
@@ -159,7 +164,8 @@ def s_go_up():
 
 def s_stay_up():
     oled.fill(0)
-    oled.text("- {}".format(training.current_exercise.reps+1),0,0)
+    draw_ex_name()
+    bf.text("- {}".format(training.current_exercise.reps+1),37,20,3,1)
     bmp.button_icons4(bitmaps.BLANK, bitmaps.BLANK, bitmaps.PAUSE, bitmaps.BLANK)
     oled.show()
     starttime = time.ticks_ms()
@@ -174,7 +180,8 @@ def s_stay_up():
 
 def s_go_down():
     oled.fill(0)
-    oled.text("v {}".format(training.current_exercise.reps+1),0,0)
+    draw_ex_name()
+    bf.text("v {}".format(training.current_exercise.reps+1),37,20,3,1)
     bmp.button_icons4(bitmaps.BLANK, bitmaps.BLANK, bitmaps.PAUSE, bitmaps.BLANK)
     oled.show()
     starttime = time.ticks_ms()
@@ -189,7 +196,8 @@ def s_go_down():
 
 def s_stay_down():
     oled.fill(0)
-    oled.text("_ {}".format(training.current_exercise.reps+1),0,0)
+    draw_ex_name()
+    bf.text("_ {}".format(training.current_exercise.reps+1),37,20,3,1)
     bmp.button_icons4(bitmaps.BLANK, bitmaps.BLANK, bitmaps.PAUSE, bitmaps.BLANK)
     oled.show()
     starttime = time.ticks_ms()
