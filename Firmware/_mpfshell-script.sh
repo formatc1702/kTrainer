@@ -6,7 +6,7 @@ ext=.py
 if [[ $cmd == *"c"* ]]; then
   if [[ $cmd != *"r"* ]]; then
     echo ⚙ Compile!
-    /Users/daniel/Projects/Utilities/ESP8266/Firmware/micropython-1.9.1/mpy-cross/mpy-cross $file$ext
+    /Users/daniel/Projects/Utilities/ESP8266/Firmware/micropython-1.9.4/mpy-cross/mpy-cross $file$ext
   fi
   ext=.mpy
 fi
