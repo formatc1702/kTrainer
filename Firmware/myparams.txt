@@ -1,8 +1,8 @@
 A1
     Bew 15
 B6
-    Sitz 19
-    Lehne 1
+    Sitz 16
+    Lehne 2
     Position 6
 H7
     Sitz 4
@@ -10,12 +10,12 @@ F1
     Loch 3
 F11L
     Loch 5
-    Fuss F3
+    Fuss D1
     Start 3
     Kurbel 3
 F11R
     Loch 5
-    Fuss F3
+    Fuss D1
     Start 3
     Kurbel 3
 F21
@@ -28,12 +28,20 @@ F3
     Bew 15
 F31
     Loch 9
-    Beine H9
+    Beine G7
     Start 12
 C1
     Sitz 7
     Lehne vorne
     Arme 1
+C3
+    Sitz 3
+    Griffe parallel
+    Hebel hinten
+C5
+    Sitz 5
+    Polster 24
+    Arme waagerecht
 C7
     Polster 6
     Bew 2-17
@@ -44,9 +52,18 @@ D6
     Sitz 7
     Lehne 3
     Griffe vertikal
+E3
+    Sitz 5
+    Lehne hinten
+G4
+    Sitz 5
+    Polster 17
+    Kopf 5
 G5
     Sitz 5
     Polster 18
     Kopf 4
-H7
+H34
     Sitz 4
+H7
+    Sitz 6
