@@ -7,6 +7,10 @@
 
 void ExecStatemachines();
 
+void evalButtons(void (*f1)(), void (*f2)(), void (*f3)(), void (*f4)());
+void smContinue();
+void doNothing();
+// STATES
 State smStart();
 State smSelectExerciseHead();
 State smSelectExerciseBody();
@@ -24,5 +28,13 @@ State smCompleted();
 // State smDiscardXXX();
 // State smReviewXXX();
 // State smExitXXX();
+
+// TRANSITIONS
+void smSelectExercise();
+void smStartCountdown();
+void smStartExercise();
+void smDoExercise();
+void smPauseExercise();
+void smFinishExercise();
 
 #endif

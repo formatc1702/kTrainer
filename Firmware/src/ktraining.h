@@ -4,7 +4,7 @@
 #include <Arduino.h>
 
 #define NUM_EXERCISES 12
-#define NUM_REPS      10
+#define NUM_MAX_REPS  10
 
 enum {XPENDING, ONGOING, DONE, SKIPPED};
 enum {GO_UP, STAY_UP, GO_DOWN, STAY_DOWN};
@@ -31,9 +31,11 @@ struct kTraining {
 void resetTraining();
 boolean trainingComplete();
 uint8_t currentExercise();
+uint8_t currentReps();
 void nextExercise();
 void previousExercise();
 void startExercise();
+void doRep();
 void finishExercise();
 void skipExercise();
 void resetExercise();

@@ -40,6 +40,14 @@ void startExercise() {
   myTraining.currentPosition = GO_UP;
 }
 
+void doRep() {
+  myTraining.exercises[myTraining.currentExercise].reps++;
+}
+
+uint8_t currentReps() {
+  return myTraining.exercises[myTraining.currentExercise].reps;
+}
+
 void finishExercise() {
   myTraining.exercises[myTraining.currentExercise].status = DONE;
 }
