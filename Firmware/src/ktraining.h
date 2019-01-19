@@ -3,7 +3,10 @@
 
 #include <Arduino.h>
 
-enum {open, ongoing, done, skipped};
+#define NUM_EXERCISES 12
+#define NUM_REPS      10
+
+enum {XPENDING, ONGOING, DONE, SKIPPED};
 
 struct kParam {
   char param[2];
@@ -19,25 +22,18 @@ struct kExercise {
 };
 
 struct kTraining {
-  struct kExercise exercises[12];
+  struct kExercise exercises[NUM_EXERCISES];
   uint8_t currentExercise;
 };
 
+void resetTraining();
+boolean trainingComplete();
+uint8_t currentExercise();
+void nextExercise();
+void previousExercise();
+void startExercise();
+void finishExercise();
+void skipExercise();
+void resetExercise();
+
 #endif
-
-/*
-struct student_college_detail
-{
-    int college_id;
-    char college_name[50];
-};
-
-struct student_detail
-{
-    int id;
-    char name[20];
-    float percentage;
-    // structure within structure
-    struct student_college_detail clg_data;
-}stu_data;
-// */
