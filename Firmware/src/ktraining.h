@@ -7,6 +7,7 @@
 #define NUM_REPS      10
 
 enum {XPENDING, ONGOING, DONE, SKIPPED};
+enum {GO_UP, STAY_UP, GO_DOWN, STAY_DOWN};
 
 struct kParam {
   char param[2];
@@ -24,6 +25,7 @@ struct kExercise {
 struct kTraining {
   struct kExercise exercises[NUM_EXERCISES];
   uint8_t currentExercise;
+  uint8_t currentPosition;
 };
 
 void resetTraining();

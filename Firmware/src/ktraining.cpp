@@ -37,6 +37,7 @@ void previousExercise() {
 
 void startExercise() {
   myTraining.exercises[myTraining.currentExercise].status = ONGOING;
+  myTraining.currentPosition = GO_UP;
 }
 
 void finishExercise() {
