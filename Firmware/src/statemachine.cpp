@@ -1,5 +1,6 @@
 #include "statemachine.h"
 #include "ktraining.h"
+#include "gui.h"
 
 SM myStateMachine(smStart);
 
@@ -28,6 +29,7 @@ void evalButtons(void (*f1)(), void (*f2)(), void (*f3)(), void (*f4)()) {
 
 State smStart() {
   Serial.print("Started.");
+  guiWelcome();
   resetTraining();
   smSelectExercise();
 }
@@ -35,6 +37,7 @@ State smStart() {
 State smSelectExerciseHead() {
   Serial.print("Select ex ");
   Serial.println(currentExercise());
+  guiSelectExercise();
 }
 State smSelectExerciseBody() {
   evalButtons(previousExercise, doNothing, smStartCountdown, nextExercise);
@@ -43,6 +46,7 @@ State smSelectExerciseBody() {
 State smCountdownHead() {
   Serial.print("Countdown: ");
   Serial.println(countdown);
+  void guiCountdown();
 }
 State smCountdownBody() {
   evalButtons(doNothing, doNothing, doNothing, doNothing);
@@ -58,6 +62,7 @@ State smCountdownBody() {
 
 State smDoingHead() {
   Serial.println("Doing exercise");
+  void guiDoingExercise();
 }
 State smDoingBody() {
   evalButtons(smSelectExercise, doNothing, smPauseExercise, doNothing);
@@ -75,6 +80,7 @@ State smDoingBody() {
 
 State smPausedHead() {
   Serial.print("Exercise paused");
+  void guiPaused();
 }
 State smPausedBody() {
   evalButtons(doNothing, doNothing, smStartCountdown, doNothing);
